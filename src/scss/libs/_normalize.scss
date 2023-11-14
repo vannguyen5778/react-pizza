@@ -3,8 +3,9 @@
   margin: 0;
   list-style: none;
   outline: none;
-  font-family: 'Proxima Nova', Roboto, system-ui, Tahoma, sans-serif;
+  font-family: 'Nunito', Roboto, system-ui, Tahoma, sans-serif;
   box-sizing: border-box;
+
 }
 
 html {
@@ -16,6 +17,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   color: $black;
+  background-color: $background;
+
 }
 
 a,

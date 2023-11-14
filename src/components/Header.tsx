@@ -6,14 +6,14 @@ import Cart from "@/assets/img/cart.svg"
 function Header() {
   return (
     <div className="header">
-        <div className="left">
-            <span><img src={Logo} alt="logo" /></span>
+        <div className="logo-wrapper">
+            <span className='logo'><img src={Logo} alt="logo" /></span>
             <div className="text-block">
-                <p className="name">REACT PIZZA</p>
+                <h1 className="name">REACT PIZZA</h1>
                 <p className="desc">самая вкусная пицца во вселенной</p>
             </div>
         </div>
-        <div className="right">
+        <div className="cart-wrapper">
             <button>
                 <div className="total-price">
                     <span>0</span>
