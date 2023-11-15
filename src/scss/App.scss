@@ -9,12 +9,14 @@ body {
   border: none;
   background-color: $orange;
   color: #fff;
+  padding: 0 20px;
 }
 
 @mixin white-bg {
   border: 1px solid $orange;
   background-color: #fff;
   color: $orange;
+  padding: 0 20px;
 }
 @mixin flex-between {
   display: flex;
@@ -33,6 +35,14 @@ body {
   border-radius: 30px;
   height: 40px;
   min-width: 130px;
+  padding: 0 20px;
+}
+
+@mixin header-text {
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #181818;
 }
 
 .app {
@@ -59,11 +69,7 @@ body {
     }
     .text-block {
       h1 {
-        font-weight: 800;
-        font-size: 20px;
-        text-transform: uppercase;
-        color: #181818;
-        letter-spacing: 1%;
+        @include header-text;
       }
 
       p {
@@ -273,6 +279,134 @@ body {
             border-radius: 50%;
             font-size: 12px;
           }
+        }
+      }
+    }
+  }
+}
+
+.cart {
+  padding: 20px;
+  max-width: 70%;
+  margin: auto;
+  .top-section {
+    @include flex-between;
+    .header-wrapper {
+      padding: 20px 0;
+      .header-text {
+        font-weight: 700;
+        padding-left: 10px;
+        font-size: 24px;
+      }
+      img {
+        width: 34px;
+        height: 34px;
+        vertical-align: bottom;
+        padding-bottom: 7px;
+      }
+    }
+
+    .bin-wrapper {
+      span {
+        font-size: 12px;
+        color: #c7c5c5;
+      }
+      img {
+        vertical-align: middle;
+        width: 24px;
+        height: 24px;
+        padding: 0 5px 3px;
+      }
+    }
+  }
+
+  &__items {
+    .item {
+      @include flex-between;
+      padding: 20px 0;
+      border-top: 1px solid $gray-line;
+      h2 {
+        font-size: 18px;
+        color: #000;
+        font-weight: 800;
+      }
+
+      .left {
+        flex: 1;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        img {
+          width: 80px;
+          height: 80px;
+        }
+        .text-wrap {
+          .description {
+            color: #8d8d8d;
+            font-size: 15px;
+          }
+        }
+      }
+
+      .right {
+        flex: 1;
+        span {
+          width: 32px;
+          height: 32px;
+          text-align: center;
+          line-height: 30px;
+          font-weight: 800;
+          border-radius: 50%;
+          font-size: 15px;
+          color: $orange;
+          border: 2px solid $orange;
+        }
+        @include flex-between;
+        .quantity-wrapper {
+          @include flex-between;
+          h2 {
+            padding: 16px;
+          }
+        }
+        .delete {
+          color: #c7c5c5;
+          border: 2px solid #c7c5c5;
+        }
+      }
+    }
+    .total-wrapper {
+      @include flex-between;
+      padding: 20px 0;
+
+      span {
+        font-weight: 700;
+      }
+      .quantity {
+        color: #000;
+      }
+      .price {
+        color: $orange;
+      }
+    }
+    .button-wrapper {
+      @include flex-between;
+      padding: 20px 0;
+      button {
+        @include btn;
+      }
+      .pay {
+        @include orange-bg;
+      }
+      .back {
+        border: 1px solid #cecccc;
+        color: #cecccc;
+        background-color: #fff;
+        padding: 0 20px;
+        img {
+          width: 6px;
+          margin-right: 5px;
+          vertical-align: baseline;
         }
       }
     }

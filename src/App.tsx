@@ -1,16 +1,18 @@
 import "@/scss/App.scss";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-// import Button from './components/Button'
-import ArrowUp from "@/assets/img/arrow-top.svg";
-import Plus from "@/assets/img/plus.svg";
-import Home from '@/pages/Home'
+import Home from "@/pages/Home";
+import Cart from "@/pages/Cart";
+
 function App() {
   return (
     <div className="app">
       <Header />
-      
-      <Routes><Route path="/" element={<Home />}></Route></Routes>
+
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
+      </Routes>
     </div>
   );
 }
