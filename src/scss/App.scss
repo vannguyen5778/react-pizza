@@ -284,8 +284,29 @@ body {
     }
   }
 }
+.empty {
+  display: block;
+  padding: 20px;
+  max-width: 50%;
+  margin: auto;
+  text-align: center;
+  p {
+    padding: 20px;
+  }
+  img {
+    width: 300px;
+  }
+  button {
+    @include btn;
+    background: #000;
+    color: #fff;
+    margin-top: 20px;
+  border: none;
 
+  }
+}
 .cart {
+  display: none;
   padding: 20px;
   max-width: 70%;
   margin: auto;

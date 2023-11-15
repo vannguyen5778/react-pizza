@@ -2,10 +2,18 @@ import React from "react";
 import CartSVG from "@/assets/img/cart.svg";
 import Trash from "@/assets/img/trash.svg";
 import ArrowLeft from "@/assets/img/grey-arrow-left.svg";
+import EmptyCart from "@/assets/img/empty-cart.png";
 type Props = {};
 
 const Cart = (props: Props) => {
   return (
+    <>
+    <div className="empty">
+        <h2>Корзина пустая 😕</h2>
+        <p>Вероятней всего, вы не заказывали ещё пиццу. <br/> Для того, чтобы заказать пиццу, перейди на главную страницу.</p>
+        <img src={EmptyCart} alt="" />
+        <button>Вернуться назад</button>
+    </div>
     <div className="cart">
       <div className="top-section">
         <div className="header-wrapper">
@@ -55,6 +63,7 @@ const Cart = (props: Props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
