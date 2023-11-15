@@ -41,7 +41,7 @@ body {
   font-family: "Nunito", sans-serif;
   padding: 0 40px;
   border-radius: 8px;
-  width: 80%;
+  width: 90%;
   height: 90%;
 }
 
@@ -117,7 +117,7 @@ body {
       font-weight: 700;
       &:hover {
         // background-color: #f9f9f9;
-        opacity: .5;
+        opacity: 0.5;
       }
       .active {
         background-color: $black;
@@ -172,86 +172,107 @@ body {
   h1 {
     font-size: 28px;
   }
-  .pizza {
-    width: 280px;
-    height: 459px;
+  .pizzas {
     text-align: center;
-    &__image {
-      width: 260px;
-      height: 260px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 280px);
+    row-gap: 30px;
+    // gap: 30px 10px;
+    justify-content: space-around;
+    &__error {
+      display: none; //error
+      width: 50%;
+      margin: auto;
+      padding: 20px;
+      p {
+        padding: 10px;
+        font-size: 18px;
+      }
     }
-    &__name {
-      font-size: 18px;
-      font-weight: 800;
-      color: #000;
-      padding: 10px 0;
-    }
-    .options-wrapper {
-      background-color: $gray-line;
-      font-size: 14px;
-      font-weight: 700;
-      padding: 4px;
-      border-radius: 8px;
-      ul {
-        @include flex-between;
-        flex-direction: row;
+
+    .pizza {
+      // display: none;
+      width: 280px;
+      height: 459px;
+      text-align: center;
+
+      &__image {
+        width: 260px;
+        height: 260px;
+      }
+      &__name {
+        font-size: 18px;
+        font-weight: 800;
+        color: #000;
+        padding: 10px 0;
+      }
+      .options-wrapper {
+        background-color: $gray-line;
+        font-size: 14px;
+        font-weight: 700;
         padding: 4px;
-      }
-      li {
-        padding: 6px 15px;
-        flex: 1;
-        text-align: center;
-      }
-      .active {
-        background-color: #fff;
-        border-radius: 5px;
-      }
-      .disabled {
-        opacity: .3;
-      }
-    }
-    .price {
-      font-size: 20px;
-      font-weight: 800;
-      color: #000;
-    }
-    .bottom {
-      @include flex-between;
-      padding: 12px 0;
-
-      .add-to-cart-btn {
-        @include btn;
-        @include flex-around;
-        padding: 0 15px;
-        line-height: 22px;
-        // @include white-bg; //white setting
-        @include orange-bg; //orange
-        svg {
-          width: 12px;
-          height: 12px;
-          path {
-            // fill: #EB5A1E;  //white setting when it's on
-          }
+        border-radius: 8px;
+        ul {
+          @include flex-between;
+          flex-direction: row;
+          padding: 4px;
         }
-
-        span {
-          color: $orange;
-          color: #fff; //orange setting
-          font-size: 14px;
-          font-weight: 800;
-          padding: 0 10px;
-        }
-
-        .quantity {
-          @include orange-bg;
-          padding: 0 3px;
-          width: 24px;
-          height: 24px;
+        li {
+          padding: 6px 15px;
+          flex: 1;
           text-align: center;
-          line-height: 24px;
-          font-weight: 800;
-          border-radius: 50%;
-          font-size: 12px;
+        }
+        .active {
+          background-color: #fff;
+          border-radius: 5px;
+        }
+        .disabled {
+          opacity: 0.3;
+        }
+      }
+      .price {
+        font-size: 20px;
+        font-weight: 800;
+        color: #000;
+      }
+      .bottom {
+        @include flex-between;
+        padding: 12px 0;
+
+        .add-to-cart-btn {
+          @include btn;
+          @include flex-around;
+          padding: 0 15px;
+          line-height: 22px;
+          // @include white-bg; //white setting
+          @include orange-bg; //orange
+          svg {
+            width: 12px;
+            height: 12px;
+            path {
+              // fill: #EB5A1E;  //white setting when it's on
+            }
+          }
+
+          span {
+            color: $orange;
+            color: #fff; //orange setting
+            font-size: 14px;
+            font-weight: 800;
+            padding: 0 10px;
+          }
+
+          .quantity {
+            @include orange-bg;
+            padding: 0 3px;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            line-height: 24px;
+            font-weight: 800;
+            border-radius: 50%;
+            font-size: 12px;
+          }
         }
       }
     }
