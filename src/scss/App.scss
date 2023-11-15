@@ -5,11 +5,34 @@
 body {
   margin: 45px 0;
 }
+@mixin orange-bg {
+  border: none;
+  background-color: $orange;
+  color: #fff;
+}
 
+@mixin white-bg {
+  border: 1px solid $orange;
+  background-color: #fff;
+  color: $orange;
+}
 @mixin flex-between {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@mixin flex-around {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin btn {
+  cursor: pointer;
+  border-radius: 30px;
+  height: 40px;
+  min-width: 130px;
 }
 
 .app {
@@ -53,13 +76,9 @@ body {
   .cart-wrapper {
     button {
       @include flex-between;
-      background-color: $orange;
-      border-radius: 30px;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      min-width: 100px;
-      text-align: center;
+      @include btn;
+      @include orange-bg;
+      padding: 8px 30px;
 
       span {
         color: #fff;
@@ -94,10 +113,11 @@ body {
     .categories-btn {
       padding: 10px 24px;
       border-radius: 30px;
-      background-color: #e6e4e4;
+      background-color: #f2f2f2;
       font-weight: 700;
       &:hover {
-        background-color: #f9f9f9;
+        // background-color: #f9f9f9;
+        opacity: .5;
       }
       .active {
         background-color: $black;
@@ -134,6 +154,7 @@ body {
         li {
           width: 100%;
           padding: 12px 20px;
+          cursor: pointer;
           &:hover {
             background-color: rgba(254, 95, 30, 0.05);
           }
@@ -141,6 +162,96 @@ body {
             font-weight: 700;
             color: $orange;
           }
+        }
+      }
+    }
+  }
+}
+
+.pizza-block {
+  h1 {
+    font-size: 28px;
+  }
+  .pizza {
+    width: 280px;
+    height: 459px;
+    text-align: center;
+    &__image {
+      width: 260px;
+      height: 260px;
+    }
+    &__name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #000;
+      padding: 10px 0;
+    }
+    .options-wrapper {
+      background-color: $gray-line;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 4px;
+      border-radius: 8px;
+      ul {
+        @include flex-between;
+        flex-direction: row;
+        padding: 4px;
+      }
+      li {
+        padding: 6px 15px;
+        flex: 1;
+        text-align: center;
+      }
+      .active {
+        background-color: #fff;
+        border-radius: 5px;
+      }
+      .disabled {
+        opacity: .3;
+      }
+    }
+    .price {
+      font-size: 20px;
+      font-weight: 800;
+      color: #000;
+    }
+    .bottom {
+      @include flex-between;
+      padding: 12px 0;
+
+      .add-to-cart-btn {
+        @include btn;
+        @include flex-around;
+        padding: 0 15px;
+        line-height: 22px;
+        // @include white-bg; //white setting
+        @include orange-bg; //orange
+        svg {
+          width: 12px;
+          height: 12px;
+          path {
+            // fill: #EB5A1E;  //white setting when it's on
+          }
+        }
+
+        span {
+          color: $orange;
+          color: #fff; //orange setting
+          font-size: 14px;
+          font-weight: 800;
+          padding: 0 10px;
+        }
+
+        .quantity {
+          @include orange-bg;
+          padding: 0 3px;
+          width: 24px;
+          height: 24px;
+          text-align: center;
+          line-height: 24px;
+          font-weight: 800;
+          border-radius: 50%;
+          font-size: 12px;
         }
       }
     }
