@@ -70,7 +70,7 @@ const Pizza = ({ pizzaData }: Props) => {
         </ul>
       </div>
       <div className="bottom">
-        <p className="price">от 395 ₽</p>
+        <p className="price">от {price} ₽</p>
         <button className={`add-to-cart-btn ${quantity === 0 ? "" : "white"}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

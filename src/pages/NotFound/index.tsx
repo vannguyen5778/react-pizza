@@ -1,10 +1,10 @@
 import React from "react";
+import styles from './NotFound.module.scss'
 
-type Props = {};
 
-const NotFound = (props: Props) => {
+const NotFound = () => {
   return (
-    <div className="pizzas__error">
+    <div className={styles.base}>
       <h2>Ничего не найдено 😕</h2>
       <p>
         К сожалению, данная страница отсутсвует в нашем интернет-магазине

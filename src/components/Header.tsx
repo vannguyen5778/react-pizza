@@ -18,14 +18,14 @@ function Header() {
         <Link to="/cart">
         <div className="cart-wrapper">
             <button>
-                <div className="total-price">
+                <span className="total-price">
                     <span>0</span>
                     <span>₽</span>
-                </div>
-                <div className="item-quantity">
+                </span>
+                <span className="item-quantity">
                     <img src={Cart} alt="" />
                     <span>0</span>                    
-                </div>
+                </span>
             </button>
         </div>
         </Link>
