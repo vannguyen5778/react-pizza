@@ -6,8 +6,8 @@ type Props = {
 const Pizza = ({ pizzaData }: Props) => {
   const { id, imageUrl, title, types, sizes, price, category, rating } =
     pizzaData;
-  const [size, setSize] = useState<number>(26);
-  const [thickness, setThickness] = useState<number>(0);
+  const [size, setSize] = useState<number>(sizes[0]);
+  const [thickness, setThickness] = useState<number>(types[0]);
   const [quantity, setQuantity] = useState<number>(0);
 
   const TYPES_MAP = new Map();
@@ -47,7 +47,7 @@ const Pizza = ({ pizzaData }: Props) => {
               ))}
           </ul>
         )}
-
+        
         <ul className="size">
           {sizeOptions.map((option) =>
             sizes.includes(option) ? (
@@ -58,6 +58,7 @@ const Pizza = ({ pizzaData }: Props) => {
                 {option}cм.
               </li>
             ) : (
+
               <li className="disabled">
                 {option}cм.
               </li>
