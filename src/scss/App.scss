@@ -125,10 +125,13 @@ body {
         // background-color: #f9f9f9;
         opacity: 0.5;
       }
-      .active {
-        background-color: $black;
-        color: #fff;
-      }
+    }
+    .active {
+      background-color: $black;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-weight: 700;
     }
   }
   .sort-wrapper {
@@ -140,6 +143,7 @@ body {
       &__choice {
         color: $orange;
         border-bottom: 1px dashed $orange;
+        padding-top: 5px;
       }
       img {
         padding: 1px 3px;
@@ -147,7 +151,7 @@ body {
     }
 
     .sort-popup {
-      display: none;
+      // display: none;
       margin-top: 10px;
       position: absolute;
       right: 0;
@@ -163,6 +167,8 @@ body {
           cursor: pointer;
           &:hover {
             background-color: rgba(254, 95, 30, 0.05);
+            font-weight: 700;
+            color: $orange;
           }
           .active {
             font-weight: 700;
@@ -176,13 +182,17 @@ body {
 
 .pizza-block {
   h1 {
-    font-size: 28px;
+    font-size: 30px;
+    color: #000;
+    font-weight: 800;
+    padding: 20px 0;
   }
   .pizzas {
     text-align: center;
     display: grid;
     grid-template-columns: repeat(auto-fit, 280px);
     row-gap: 30px;
+    padding: 20px 0 60px;
     // gap: 30px 10px;
     justify-content: space-around;
     &__error {
@@ -250,22 +260,25 @@ body {
           @include flex-around;
           padding: 0 15px;
           line-height: 22px;
-          // @include white-bg; //white setting
           @include orange-bg; //orange
+          &.white {
+            @include white-bg; //white setting
+          }
+
           svg {
             width: 12px;
             height: 12px;
-            path {
-              // fill: #EB5A1E;  //white setting when it's on
-            }
+            
           }
 
           span {
-            color: $orange;
             color: #fff; //orange setting
             font-size: 14px;
             font-weight: 800;
-            padding: 0 10px;
+            padding: 10px;
+            &.orange {
+              color: $orange;
+            }
           }
 
           .quantity {
@@ -301,8 +314,7 @@ body {
     background: #000;
     color: #fff;
     margin-top: 20px;
-  border: none;
-
+    border: none;
   }
 }
 .cart {

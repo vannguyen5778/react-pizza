@@ -8,7 +8,6 @@ function App() {
   return (
     <div className="app">
       <Header />
-
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
