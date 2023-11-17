@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import ArrowUp from "@/assets/img/arrow-top.svg";
-import { useSorting } from "@/context/SortingContext";
+import { useSearching } from "@/context/SearchingContext";
 
 const Sort = () => {
   const sortChoices = ["популярности", "цене", "алфавиту"];
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
-  const { sortID, setSortID } = useSorting();
-  // const [sortID, setSortID] = useState<number>(0);
+  const { sortID, setSortID } = useSearching();
   const handleChoice = (index: number) => {
-    setSortID(index)
+    setSortID(index);
     setPopupOpen(false);
   };
   return (

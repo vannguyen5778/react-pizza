@@ -6,19 +6,7 @@ import Pizza from "@/components/Pizza";
 import Skeleton from "@/components/Pizza/Skeleton";
 
 function Home() {
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("https://65559a0b84b36e3a431dfcd7.mockapi.io/items")
-      .then((res) => res.json())
-      .then((arr) => {
-        setTimeout(() => {
-          setItems(arr);
-          setIsLoading(false);
-        }, 1000);
-      });
-  }, []);
+ 
 
   return (
     <>

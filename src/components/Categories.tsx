@@ -1,13 +1,8 @@
-import { useSorting } from "@/context/SortingContext";
-import { useState } from "react";
-
-
+import { useSearching } from "@/context/SearchingContext";
 
 function Categories() {
-  const { clickedCategory,
-    setClickedCategory } = useSorting();
-  // const [clickedCategory,
-  //   setClickedCategory] = useState<number>(0);
+  const { clickedCategory, setClickedCategory } = useSearching();
+
   const categories = [
     "Все",
     "Мясные",
@@ -18,13 +13,15 @@ function Categories() {
   ];
   const handleClickedCategory = (index: number) => {
     setClickedCategory(index);
-    console.log(index)
+    console.log(index);
   };
   return (
     <ul className="categories">
       {categories.map((el, index) => (
         <li
-          className={`${clickedCategory === index ? "active" : "categories-btn"}`}
+          className={`${
+            clickedCategory === index ? "active" : "categories-btn"
+          }`}
           key={el}
           onClick={() => handleClickedCategory(index)}
         >
