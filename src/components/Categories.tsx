@@ -13,8 +13,8 @@ function Categories() {
   ];
   const handleClickedCategory = (index: number) => {
     setClickedCategory(index);
-    console.log(index);
   };
+  
   return (
     <ul className="categories">
       {categories.map((el, index) => (

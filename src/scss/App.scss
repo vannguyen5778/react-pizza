@@ -243,10 +243,11 @@ body {
     justify-content: space-around;
 
     &__error {
-      display: none; //error
-      width: 50%;
+      // display: none; //error
+      width: 60%;
       margin: auto;
-      padding: 20px;
+      padding: 150px;
+      text-align: center;
       p {
         padding: 10px;
         font-size: 18px;

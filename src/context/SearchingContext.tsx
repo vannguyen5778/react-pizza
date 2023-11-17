@@ -16,10 +16,10 @@ interface SearchingContextProps {
   clickedCategory: number;
   setClickedCategory: React.Dispatch<React.SetStateAction<number>>;
   setSortID: React.Dispatch<React.SetStateAction<number>>;
-  items: ItemProps[];
-  setItems: React.Dispatch<React.SetStateAction<ItemProps[]>>;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  // items: ItemProps[];
+  // setItems: React.Dispatch<React.SetStateAction<ItemProps[]>>;
+  // isLoading: boolean;
+  // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface SearchingProviderProps {
@@ -36,8 +36,8 @@ export const useSearching = (): SearchingContextProps => {
 export function SearchingProvider({ children }: SearchingProviderProps) {
   const [clickedCategory, setClickedCategory] = useState<number>(0);
   const [sortID, setSortID] = useState<number>(0);
-  const [items, setItems] = useState<ItemProps[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [items, setItems] = useState<ItemProps[]>([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
   return (
     <SearchingContext.Provider
@@ -46,10 +46,10 @@ export function SearchingProvider({ children }: SearchingProviderProps) {
         setClickedCategory,
         sortID,
         setSortID,
-        items,
-        setItems,
-        isLoading,
-        setIsLoading,
+        // items,
+        // setItems,
+        // isLoading,
+        // setIsLoading,
       }}
     >
       {children}

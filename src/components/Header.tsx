@@ -2,12 +2,15 @@ import React from 'react'
 import Logo from "@/assets/img/pizza-logo.svg"
 import Cart from "@/assets/img/cart.svg"
 import { Link } from 'react-router-dom'
+import { useSearching } from '@/context/SearchingContext';
 
 function Header() {
+  const { setSortID, setClickedCategory } = useSearching();
+
   return (
     <div className="header">
         <Link to="/">
-        <div className="logo-wrapper">
+        <div className="logo-wrapper" onClick={() => {setSortID(0); setClickedCategory(0)}}>
             <span className='logo'><img src={Logo} alt="logo" /></span>
             <div className="text-block">
                 <h1 className="name">REACT PIZZA</h1>
