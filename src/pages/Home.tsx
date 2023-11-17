@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from "react";
-import Plus from "@/assets/img/plus.svg";
+import { useEffect, useState } from "react";
 import Categories from "@/components/Categories";
 import Sort from "@/components/Sort";
 import Pizza from "@/components/Pizza";
 import Skeleton from "@/components/Pizza/Skeleton";
-import { useSearching } from "@/context/SearchingContext";
+import { useSearching, ItemProps } from "@/context/SearchingContext";
 import axios from "axios";
 import { SORT_MAP } from "../components/Sort";
-type Props = {
-  // isLoading: boolean;
-  // items: any[];
-};
+
 function Home() {
-  const { sortID, clickedCategory } = useSearching();
+  const { sortID, clickedCategory, searchedValue } = useSearching();
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getParams = (clickedCategory: number, sortID: number) => {
-    return( clickedCategory === 0
+    return clickedCategory === 0
       ? { sortBy: SORT_MAP.get(sortID) }
-      : { sortBy: SORT_MAP.get(sortID), category: clickedCategory.toString() })
+      : { sortBy: SORT_MAP.get(sortID), category: clickedCategory.toString() };
   };
 
   useEffect(() => {
@@ -30,12 +26,20 @@ function Home() {
         params: getParams(clickedCategory, sortID),
       })
       .then((res) => {
-        setItems(res.data);
+        searchedValue !== ""
+          ? setItems(
+              res.data.filter((pizza: ItemProps) =>
+                pizza.title
+                  .toLocaleLowerCase()
+                  .includes(searchedValue.toLocaleLowerCase())
+              )
+            )
+          : setItems(res.data);
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
     window.scrollTo(0, 0);
-  }, [clickedCategory, sortID]);
+  }, [clickedCategory, sortID, searchedValue]);
 
   return (
     <>
@@ -46,7 +50,7 @@ function Home() {
 
       <div className="pizza-block">
         <h1>Пиццы</h1>
-        {items.length === 0 ? (
+        {items.length === 0 && !isLoading ? (
           <div className="pizzas__error">
             <h2>Произошла ошибка 😕</h2>
             <p>

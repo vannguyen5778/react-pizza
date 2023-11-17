@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type ItemProps = {
+export type ItemProps = {
   id: number;
   imageUrl: string;
   title: string;
@@ -16,6 +16,9 @@ interface SearchingContextProps {
   clickedCategory: number;
   setClickedCategory: React.Dispatch<React.SetStateAction<number>>;
   setSortID: React.Dispatch<React.SetStateAction<number>>;
+  searchedValue: string;
+  setSearchedValue: React.Dispatch<React.SetStateAction<string>>;
+
   // items: ItemProps[];
   // setItems: React.Dispatch<React.SetStateAction<ItemProps[]>>;
   // isLoading: boolean;
@@ -36,6 +39,7 @@ export const useSearching = (): SearchingContextProps => {
 export function SearchingProvider({ children }: SearchingProviderProps) {
   const [clickedCategory, setClickedCategory] = useState<number>(0);
   const [sortID, setSortID] = useState<number>(0);
+  const [searchedValue, setSearchedValue] = useState<string>('')
   // const [items, setItems] = useState<ItemProps[]>([]);
   // const [isLoading, setIsLoading] = useState(true);
 
@@ -46,6 +50,8 @@ export function SearchingProvider({ children }: SearchingProviderProps) {
         setClickedCategory,
         sortID,
         setSortID,
+        searchedValue,
+        setSearchedValue,
         // items,
         // setItems,
         // isLoading,

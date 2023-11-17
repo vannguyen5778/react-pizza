@@ -13,10 +13,6 @@ const Sort = () => {
   const { sortID, setSortID } = useSearching();
   const handleChoice = (index: number) => {
     setSortID(index);
-    // const sortIDconsole = index;
-    // setSortID(sortIDconsole);
-
-    // console.log(sortIDconsole,sortID)
     setPopupOpen(false);
   };
   return (

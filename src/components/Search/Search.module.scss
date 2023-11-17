@@ -1,0 +1,41 @@
+.root {
+        position: relative;
+        left: -120px;
+        input {
+            width: 300px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgb(175, 173, 173);
+            color: rgb(151, 151, 151);
+            font-size: 14px;
+            padding-left: 33px;
+            transition: all .15s ease-in-out;
+            &:focus {
+                border: 1px solid rgb(137, 135, 135);
+            width: 400px;
+
+
+            }
+    }
+    img {
+        width: 20px;
+        height: 20px;
+        opacity: .3;
+    }
+}
+
+.glass {
+    position: absolute;
+    left: 10px;
+    top: 9px;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    &:hover{
+        opacity: .7;
+
+    }
+}

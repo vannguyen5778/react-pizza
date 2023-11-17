@@ -3,6 +3,7 @@ import Logo from "@/assets/img/pizza-logo.svg"
 import Cart from "@/assets/img/cart.svg"
 import { Link } from 'react-router-dom'
 import { useSearching } from '@/context/SearchingContext';
+import Search from './Search';
 
 function Header() {
   const { setSortID, setClickedCategory } = useSearching();
@@ -18,6 +19,7 @@ function Header() {
             </div>
         </div>
         </Link>
+        <Search />
         <Link to="/cart">
         <div className="cart-wrapper">
             <button>
