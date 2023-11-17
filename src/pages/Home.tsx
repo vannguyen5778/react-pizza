@@ -5,10 +5,13 @@ import Pizza from "@/components/Pizza";
 import Skeleton from "@/components/Pizza/Skeleton";
 import { useSearching, ItemProps } from "@/context/SearchingContext";
 import axios from "axios";
-import { SORT_MAP } from "../components/Sort";
+import { SORT_MAP } from "@/components/Sort";
+import PaginationComponent from "@/components/Pagination";
 
 function Home() {
+  const itemsPerPage = 3;
   const { sortID, clickedCategory, searchedValue } = useSearching();
+  const [currentPage, setCurrentPage] = useState(1);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,7 +26,11 @@ function Home() {
     console.log(SORT_MAP.get(sortID));
     axios
       .get("https://65559a0b84b36e3a431dfcd7.mockapi.io/items", {
-        params: getParams(clickedCategory, sortID),
+        params: {
+          ...getParams(clickedCategory, sortID),
+          // limit: itemsPerPage.toString(),
+          // page: currentPage.toString(),
+        },
       })
       .then((res) => {
         searchedValue !== ""
@@ -39,7 +46,7 @@ function Home() {
       })
       .catch((err) => console.log(err));
     window.scrollTo(0, 0);
-  }, [clickedCategory, sortID, searchedValue]);
+  }, [clickedCategory, sortID, searchedValue, currentPage]);
 
   return (
     <>
@@ -59,15 +66,23 @@ function Home() {
             </p>
           </div>
         ) : (
-          <div className="pizzas">
-            {isLoading
-              ? Array(10)
-                  .fill(null)
-                  .map((_, index) => <Skeleton key={index} />)
-              : items.map((pizza, index) => (
-                  <Pizza pizzaData={pizza} key={index} />
-                ))}
-          </div>
+          <>
+            <div className="pizzas">
+              {isLoading
+                ? Array(10)
+                    .fill(null)
+                    .map((_, index) => <Skeleton key={index} />)
+                : items.map((pizza, index) => (
+                    <Pizza pizzaData={pizza} key={index} />
+                  ))}
+            </div>
+            <PaginationComponent
+              totalItems={items.length}
+              itemsPerPage={itemsPerPage}
+              page={currentPage}
+              setPage={setCurrentPage}
+            />
+          </>
         )}
       </div>
     </>

@@ -4,10 +4,7 @@ import Header from "./components/Header";
 import Home from "@/pages/Home";
 import Cart from "@/pages/Cart";
 import NotFound from "./pages/NotFound";
-import { SearchingProvider, useSearching } from "./context/SearchingContext";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { SORT_MAP } from "./components/Sort";
+import { SearchingProvider } from "./context/SearchingContext";
 
 function App() {
  
