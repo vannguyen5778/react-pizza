@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ArrowUp from "@/assets/img/arrow-top.svg";
+import { useSorting } from "@/context/SortingContext";
 
 const Sort = () => {
   const sortChoices = ["популярности", "цене", "алфавиту"];
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
-  const [sortID, setSortID] = useState<number>(0);
+  const { sortID, setSortID } = useSorting();
+  // const [sortID, setSortID] = useState<number>(0);
   const handleChoice = (index: number) => {
     setSortID(index)
     setPopupOpen(false);

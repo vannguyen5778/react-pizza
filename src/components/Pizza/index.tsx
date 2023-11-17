@@ -65,8 +65,7 @@ const Pizza = ({ pizzaData }: Props) => {
             )
           )}
 
-        
-          {/* is !types.includes(26) ? disabled :  */}
+
         </ul>
       </div>
       <div className="bottom">

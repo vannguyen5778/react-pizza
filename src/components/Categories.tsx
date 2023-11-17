@@ -1,10 +1,13 @@
+import { useSorting } from "@/context/SortingContext";
 import { useState } from "react";
 
 
 
 function Categories() {
-  const [clickedCategory,
-    setClickedCategory] = useState<number>(0);
+  const { clickedCategory,
+    setClickedCategory } = useSorting();
+  // const [clickedCategory,
+  //   setClickedCategory] = useState<number>(0);
   const categories = [
     "Все",
     "Мясные",
