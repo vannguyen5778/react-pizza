@@ -189,19 +189,18 @@ body {
   }
 }
 
-@media  screen and (max-width: 1170px) {
-  .categories{
+@media screen and (max-width: 1170px) {
+  .categories {
     width: 100%;
     overflow-x: auto;
     .categories-btn {
       width: 700px;
     }
   }
-  .sort{
+  .sort {
     display: flex;
     padding-left: 20px;
     &__text {
-      
       display: none;
     }
     &__choice {
@@ -209,10 +208,31 @@ body {
     }
   }
 }
-@media  (max-width: 820px) {
-  .top-section{
+@media (max-width: 820px) {
+  body {
+    margin: 0;
+  }
+  .app {
+    padding: 0;
+    border-radius: 0px;
+    width: 100vw;
+    overflow-y: hidden;
+  }
+  .categories {
+    padding: 20px 0;
+  }
+
+  .header {
+    background-color: #ffdf8c;
+    width: 100vw;
+    padding: 20px;
+  }
+
+  .top-section {
     flex-direction: column-reverse;
-    .sort{
+    padding: 20px;
+
+    .sort {
       display: flex;
       align-items: center;
       padding-left: 20px;
@@ -221,10 +241,31 @@ body {
         display: block;
       }
       &__choice {
-        padding-bottom: 5px;
+        padding-bottom: 3px;
       }
     }
-  };
+  }
+  .pizza-block {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 510px) {
+  .header .logo-wrapper .text-block p {
+    display: none;
+  }
+  .top-section .categories {
+    padding: 20px 0;
+  }
+  .pizza-block h1 {
+    padding: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .header .cart-wrapper button{
+    display: none;
+  }
 }
 
 .pizza-block {
@@ -237,16 +278,16 @@ body {
   .pizzas {
     text-align: center;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 280px);
+    grid-template-columns: repeat(auto-fill, 280px);
     row-gap: 30px;
     padding: 20px 0 60px;
     justify-content: space-around;
 
     &__error {
-      // display: none; //error
       width: 60%;
       margin: auto;
-      padding: 150px;
+      padding: 150px 10px;
+      min-width: 400px;
       text-align: center;
       p {
         padding: 10px;
@@ -259,7 +300,7 @@ body {
       width: 280px;
       height: 459px;
       text-align: center;
-      transform: scale(.9);
+      transform: scale(0.9);
 
       &__image {
         width: 260px;

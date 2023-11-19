@@ -22,7 +22,7 @@ const Search = () => {
       />
       {searchedValue.length > 0 && (
         <span className={styles.close}
-        onClick={() => setSearchedValue("")}
+        onClick={() => {setSearchedValue(""); console.log(searchedValue)}}
         >
           <img className="close" src={CloseIcon} alt="close icon" />
         </span>

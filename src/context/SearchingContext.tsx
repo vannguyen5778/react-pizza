@@ -18,6 +18,8 @@ interface SearchingContextProps {
   setSortID: React.Dispatch<React.SetStateAction<number>>;
   searchedValue: string;
   setSearchedValue: React.Dispatch<React.SetStateAction<string>>;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 
   // items: ItemProps[];
   // setItems: React.Dispatch<React.SetStateAction<ItemProps[]>>;
@@ -42,6 +44,7 @@ export function SearchingProvider({ children }: SearchingProviderProps) {
   const [searchedValue, setSearchedValue] = useState<string>('')
   // const [items, setItems] = useState<ItemProps[]>([]);
   // const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   return (
     <SearchingContext.Provider
@@ -52,6 +55,8 @@ export function SearchingProvider({ children }: SearchingProviderProps) {
         setSortID,
         searchedValue,
         setSearchedValue,
+        page,
+        setPage,
         // items,
         // setItems,
         // isLoading,

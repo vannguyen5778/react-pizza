@@ -9,9 +9,9 @@ import { SORT_MAP } from "@/components/Sort";
 import PaginationComponent from "@/components/Pagination";
 
 function Home() {
-  const itemsPerPage = 3;
-  const { sortID, clickedCategory, searchedValue } = useSearching();
-  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+  const { sortID, clickedCategory, searchedValue, page } = useSearching();
+ 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,8 +28,8 @@ function Home() {
       .get("https://65559a0b84b36e3a431dfcd7.mockapi.io/items", {
         params: {
           ...getParams(clickedCategory, sortID),
-          // limit: itemsPerPage.toString(),
-          // page: currentPage.toString(),
+          page: page.toString(),
+          limit: itemsPerPage.toString(),
         },
       })
       .then((res) => {
@@ -46,7 +46,7 @@ function Home() {
       })
       .catch((err) => console.log(err));
     window.scrollTo(0, 0);
-  }, [clickedCategory, sortID, searchedValue, currentPage]);
+  }, [clickedCategory, sortID, searchedValue, page]);
 
   return (
     <>
@@ -79,8 +79,7 @@ function Home() {
             <PaginationComponent
               totalItems={items.length}
               itemsPerPage={itemsPerPage}
-              page={currentPage}
-              setPage={setCurrentPage}
+              
             />
           </>
         )}

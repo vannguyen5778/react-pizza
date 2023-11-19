@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useSearching } from "@/context/SearchingContext";
 
 type Props = {
   totalItems: number;
-  page: number;
-  setPage: (page: number) => void;
   itemsPerPage: number;
 };
 
@@ -18,11 +17,12 @@ const theme = createTheme({
       primary: "#fe5f1e",
     },
   },
+  spacing: 10,
 });
 
-const PaginationComponent = ({ totalItems, page, setPage, itemsPerPage }: Props) => {
-  
-
+const PaginationComponent = ({ totalItems, itemsPerPage }: Props) => {
+  const pageCount = Math.ceil(totalItems / itemsPerPage);
+  const { page, setPage } = useSearching();
   const handlePaginationChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -33,11 +33,12 @@ const PaginationComponent = ({ totalItems, page, setPage, itemsPerPage }: Props)
   return (
     <ThemeProvider theme={theme}>
       <Pagination
-        count={Math.ceil(totalItems / itemsPerPage)}
+        count={3}
         variant="outlined"
         color="primary"
         page={page}
         onChange={handlePaginationChange}
+        sx={{ mx: 'auto', pl: 7, py: 2, width: '300px'}}
       />
     </ThemeProvider>
   );
