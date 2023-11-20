@@ -7,11 +7,22 @@ import { useSearching, ItemProps } from "@/context/SearchingContext";
 import axios from "axios";
 import { SORT_MAP } from "@/components/Sort";
 import PaginationComponent from "@/components/Pagination";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setCategoryID } from "@/redux/slices/filterSlice";
 
 function Home() {
   const itemsPerPage = 4;
   const { sortID, clickedCategory, searchedValue, page } = useSearching();
- 
+
+ const categoryID = useSelector(state => state.filter.categoryID);
+//  console.log("categoryID", categoryID)
+const dispatch = useDispatch()
+// console.log("dispatch", dispatch)
+const onChangeCategory = (id) => {
+  // console.log(id)
+  dispatch(setCategoryID(id))
+}
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,7 +34,7 @@ function Home() {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log(SORT_MAP.get(sortID));
+    // console.log(SORT_MAP.get(sortID));
     axios
       .get("https://65559a0b84b36e3a431dfcd7.mockapi.io/items", {
         params: {

@@ -27,6 +27,7 @@ const Pizza = ({ pizzaData }: Props) => {
               .fill(null)
               .map((_, index) => (
                 <li
+                key={index}
                   className={`${types.includes(index) ? "active" : "disabled"}`}
                 >
                   {TYPES_MAP.get(index)}
@@ -52,6 +53,7 @@ const Pizza = ({ pizzaData }: Props) => {
           {sizeOptions.map((option) =>
             sizes.includes(option) ? (
               <li
+              key={option}
                 className={`${size === option ? "active" : ""}`}
                 onClick={() => setSize(option)}
               >
