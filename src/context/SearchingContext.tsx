@@ -12,10 +12,10 @@ export type ItemProps = {
 };
 
 interface SearchingContextProps {
-  sortID: number;
-  clickedCategory: number;
-  setClickedCategory: React.Dispatch<React.SetStateAction<number>>;
-  setSortID: React.Dispatch<React.SetStateAction<number>>;
+  // sortID: number;
+  // clickedCategory: number;
+  // setClickedCategory: React.Dispatch<React.SetStateAction<number>>;
+  // setSortID: React.Dispatch<React.SetStateAction<number>>;
   searchedValue: string;
   setSearchedValue: React.Dispatch<React.SetStateAction<string>>;
   page: number;
@@ -39,8 +39,8 @@ export const useSearching = (): SearchingContextProps => {
 };
 
 export function SearchingProvider({ children }: SearchingProviderProps) {
-  const [clickedCategory, setClickedCategory] = useState<number>(0);
-  const [sortID, setSortID] = useState<number>(0);
+  // const [clickedCategory, setClickedCategory] = useState<number>(0);
+  // const [sortID, setSortID] = useState<number>(0);
   const [searchedValue, setSearchedValue] = useState<string>('')
   // const [items, setItems] = useState<ItemProps[]>([]);
   // const [isLoading, setIsLoading] = useState(true);
@@ -49,10 +49,10 @@ export function SearchingProvider({ children }: SearchingProviderProps) {
   return (
     <SearchingContext.Provider
       value={{
-        clickedCategory,
-        setClickedCategory,
-        sortID,
-        setSortID,
+        // clickedCategory,
+        // setClickedCategory,
+        // sortID,
+        // setSortID,
         searchedValue,
         setSearchedValue,
         page,

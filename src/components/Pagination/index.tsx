@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useSearching } from "@/context/SearchingContext";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentPage } from "@/redux/slices/filterSlice";
 
 type Props = {
   totalItems: number;
@@ -21,14 +22,15 @@ const theme = createTheme({
 });
 
 const PaginationComponent = ({ totalItems, itemsPerPage }: Props) => {
-  const pageCount = Math.ceil(totalItems / itemsPerPage);
-  const { page, setPage } = useSearching();
+  // const pageCount = Math.ceil(totalItems / itemsPerPage);
+  const { currentPage } = useSelector(state => state.filter)
+  const dispatch = useDispatch()
   const handlePaginationChange = (
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
     console.log(value);
-    setPage(value);
+    dispatch(setCurrentPage(value));
   };
   return (
     <ThemeProvider theme={theme}>
@@ -36,7 +38,7 @@ const PaginationComponent = ({ totalItems, itemsPerPage }: Props) => {
         count={3}
         variant="outlined"
         color="primary"
-        page={page}
+        page={currentPage}
         onChange={handlePaginationChange}
         sx={{ mx: 'auto', pl: 7, py: 2, width: '300px'}}
       />
