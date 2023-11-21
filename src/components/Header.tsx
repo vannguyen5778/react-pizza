@@ -4,14 +4,17 @@ import Cart from "@/assets/img/cart.svg"
 import { Link } from 'react-router-dom'
 import { useSearching } from '@/context/SearchingContext';
 import Search from './Search';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setSortID, setClickedCategory } from '@/redux/slices/filterSlice';
 function Header() {
-  const { setSortID, setClickedCategory } = useSearching();
+//   const { setSortID, setClickedCategory } = useSearching();
+const dispatch = useDispatch();
+const { items, totalPrice, totalQty } = useSelector(state => state.cart)
 
   return (
     <div className="header">
         <Link to="/">
-        <div className="logo-wrapper" onClick={() => {setSortID(0); setClickedCategory(0)}}>
+        <div className="logo-wrapper" onClick={() => {dispatch(setSortID(0)); dispatch(setClickedCategory(0))}}>
             <span className='logo'><img src={Logo} alt="logo" /></span>
             <div className="text-block">
                 <h1 className="name">REACT PIZZA</h1>
@@ -24,12 +27,12 @@ function Header() {
         <div className="cart-wrapper">
             <button>
                 <span className="total-price">
-                    <span>0</span>
+                    <span>{totalPrice}</span>
                     <span>₽</span>
                 </span>
                 <span className="item-quantity">
                     <img src={Cart} alt="" />
-                    <span>0</span>                    
+                    <span>{totalQty}</span>                    
                 </span>
             </button>
         </div>

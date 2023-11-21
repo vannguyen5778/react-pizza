@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem, setItems } from '@/redux/slices/cartSlice'
 type Props = {
   pizzaData: object;
 };
@@ -10,12 +12,43 @@ const Pizza = ({ pizzaData }: Props) => {
   const [thickness, setThickness] = useState<number>(types[0]);
   const [quantity, setQuantity] = useState<number>(0);
 
+  const dispatch = useDispatch();
+ const { items } = useSelector(state => state.cart)
+
   const TYPES_MAP = new Map();
   TYPES_MAP.set(0, "тонкое");
   TYPES_MAP.set(1, "традиционное");
 
   const sizeOptions = [26, 30, 40];
 
+  const handleOnClickAddItem = () => {
+    setQuantity(quantity + 1); 
+    const itemId = items.findIndex((obj) => obj.title === title);
+    if (itemId === -1) {
+      const item = {
+        id,
+        title,
+        type: TYPES_MAP.get(thickness),
+        size,
+        price,
+        count: quantity + 1,
+      };
+      dispatch(addItem(item));
+    } else {
+      const updatedItems = items.map((item, index) => {
+        if (index === itemId) {
+          return {
+            ...item,
+            count: quantity + 1,
+          };
+        }
+        return item;
+      });
+      dispatch(setItems(updatedItems));
+    }
+
+    console.log(items)
+  }
   return (
     <div className="pizza" key={id}>
       <img className="pizza__image" src={imageUrl} alt="" />
@@ -53,7 +86,7 @@ const Pizza = ({ pizzaData }: Props) => {
           {sizeOptions.map((option) =>
             sizes.includes(option) ? (
               <li
-              key={option}
+              key={uuidv4()}
                 className={`${size === option ? "active" : ""}`}
                 onClick={() => setSize(option)}
               >
@@ -87,7 +120,7 @@ const Pizza = ({ pizzaData }: Props) => {
           </svg>
           <span
             className={`${quantity === 0 ? "" : "orange"}`}
-            onClick={() => setQuantity(quantity + 1)}
+            onClick={handleOnClickAddItem}
           >
             Добавить
           </span>

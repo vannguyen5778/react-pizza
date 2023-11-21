@@ -1,11 +1,10 @@
-import React from "react";
 import CartSVG from "@/assets/img/cart.svg";
 import Trash from "@/assets/img/trash.svg";
 import ArrowLeft from "@/assets/img/grey-arrow-left.svg";
 import EmptyCart from "@/assets/img/empty-cart.png";
-type Props = {};
 
-const Cart = (props: Props) => {
+
+const Cart = () => {
   return (
     <>
     <div className="empty">

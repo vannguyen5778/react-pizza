@@ -35,6 +35,7 @@ const Search = () => {
         <img src={SearchIcon} className="glass" alt="magnifying glass icon" />
       </span>
       <input
+        ref={inputRef}
         type="text"
         placeholder="Поиск пиццы..."
         value={value}
