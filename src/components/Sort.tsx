@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ArrowUp from "@/assets/img/arrow-top.svg";
-import { useSearching } from "@/context/SearchingContext";
+// import { useSearching } from "@/context/SearchingContext";
+import { setSortID } from "@/redux/slices/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const SORT_MAP = new Map();
   SORT_MAP.set(0, "rating");
@@ -10,9 +12,10 @@ export const SORT_MAP = new Map();
 const Sort = () => {
   const sortChoices = ["популярности", "цене", "алфавиту"];
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
-  const { sortID, setSortID } = useSearching();
+  const { sortID } = useSelector(state => state.filter);
+  const dispatch = useDispatch()
   const handleChoice = (index: number) => {
-    setSortID(index);
+    dispatch(setSortID(index));
     setPopupOpen(false);
   };
   return (

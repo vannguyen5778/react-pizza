@@ -1,28 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilters } from "@/redux/slices/filterSlice";
+import { useSearching, ItemProps } from "@/context/SearchingContext";
+import { useNavigate } from "react-router-dom";
+
 import Categories from "@/components/Categories";
-import Sort from "@/components/Sort";
+import Sort, { SORT_MAP } from "@/components/Sort";
 import Pizza from "@/components/Pizza";
 import Skeleton from "@/components/Pizza/Skeleton";
-import { useSearching, ItemProps } from "@/context/SearchingContext";
-import axios from "axios";
-import { SORT_MAP } from "@/components/Sort";
 import PaginationComponent from "@/components/Pagination";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { setCategoryID } from "@/redux/slices/filterSlice";
+
+import axios from "axios";
+import qs from "qs";
 
 function Home() {
   const itemsPerPage = 4;
-  const { sortID, clickedCategory, searchedValue, page } = useSearching();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isSearch = useRef<boolean>(false);
+  const isMounted = useRef<boolean>(false);
 
- const categoryID = useSelector(state => state.filter.categoryID);
-//  console.log("categoryID", categoryID)
-const dispatch = useDispatch()
-// console.log("dispatch", dispatch)
-const onChangeCategory = (id) => {
-  // console.log(id)
-  dispatch(setCategoryID(id))
-}
+  const { searchedValue } = useSearching();
+
+  const { clickedCategory, sortID, currentPage } = useSelector(
+    (state) => state.filter
+  );
+
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,31 +36,60 @@ const onChangeCategory = (id) => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    // console.log(SORT_MAP.get(sortID));
-    axios
-      .get("https://65559a0b84b36e3a431dfcd7.mockapi.io/items", {
-        params: {
-          ...getParams(clickedCategory, sortID),
-          page: page.toString(),
-          limit: itemsPerPage.toString(),
-        },
-      })
-      .then((res) => {
-        searchedValue !== ""
-          ? setItems(
-              res.data.filter((pizza: ItemProps) =>
-                pizza.title
-                  .toLocaleLowerCase()
-                  .includes(searchedValue.toLocaleLowerCase())
+    const sort = SORT_MAP.get(sortID);
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        clickedCategory,
+        sort,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [clickedCategory, sortID, currentPage, navigate]);
+
+  useEffect(() => {
+    console.log("locationSearch", window.location.search);
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      console.log("params", params);
+      // const sort = SORT_MAP.get(sortID)
+      dispatch(setFilters(params));
+    }
+    isSearch.current = true;
+  }, [dispatch]);
+
+  useEffect(() => {
+    function fetchPizzas() {
+      setIsLoading(true);
+      axios
+        .get("https://65559a0b84b36e3a431dfcd7.mockapi.io/items", {
+          params: {
+            ...getParams(clickedCategory, sortID),
+            page: currentPage.toString(),
+            limit: itemsPerPage.toString(),
+          },
+        })
+        .then((res) => {
+          searchedValue !== ""
+            ? setItems(
+                res.data.filter((pizza: ItemProps) =>
+                  pizza.title
+                    .toLocaleLowerCase()
+                    .includes(searchedValue.toLocaleLowerCase())
+                )
               )
-            )
-          : setItems(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => console.log(err));
+            : setItems(res.data);
+          setIsLoading(false);
+        })
+        .catch((err) => console.log(err));
+    }
     window.scrollTo(0, 0);
-  }, [clickedCategory, sortID, searchedValue, page]);
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+    isSearch.current = false;
+  }, [clickedCategory, sortID, searchedValue, currentPage]);
 
   return (
     <>
@@ -90,7 +122,6 @@ const onChangeCategory = (id) => {
             <PaginationComponent
               totalItems={items.length}
               itemsPerPage={itemsPerPage}
-              
             />
           </>
         )}
