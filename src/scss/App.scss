@@ -96,6 +96,7 @@ body {
       .total-price {
         border-right: 1px solid $gray-line;
         padding-right: 14px;
+        display: flex;
 
         // padding-right: 6px;
         flex: 1;
@@ -107,7 +108,7 @@ body {
       .item-quantity {
         flex: 1;
         padding-left: 15px;
-
+        display: flex;
         img {
           width: 15px;
           margin-right: 5px;
@@ -263,7 +264,7 @@ body {
 }
 
 @media (max-width: 360px) {
-  .header .cart-wrapper button{
+  .header .cart-wrapper button {
     display: none;
   }
 }

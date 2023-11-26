@@ -9,9 +9,9 @@ import Sort, { SORT_MAP } from "@/components/Sort";
 import Pizza from "@/components/Pizza";
 import Skeleton from "@/components/Pizza/Skeleton";
 import PaginationComponent from "@/components/Pagination";
-
-import axios from "axios";
 import qs from "qs";
+import { fetchPizzas, selectPizzaData } from "@/redux/slices/pizzaSlice";
+import { setCurrentPage, selectFilter } from "@/redux/slices/filterSlice";
 
 function Home() {
   const itemsPerPage = 4;
@@ -20,20 +20,10 @@ function Home() {
   const isSearch = useRef<boolean>(false);
   const isMounted = useRef<boolean>(false);
 
-  const { searchedValue } = useSearching();
+  // const { searchedValue } = useSearching();
 
-  const { clickedCategory, sortID, currentPage } = useSelector(
-    (state) => state.filter
-  );
-
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const getParams = (clickedCategory: number, sortID: number) => {
-    return clickedCategory === 0
-      ? { sortBy: SORT_MAP.get(sortID) }
-      : { sortBy: SORT_MAP.get(sortID), category: clickedCategory.toString() };
-  };
+  const { clickedCategory, sortID, currentPage, searchedValue } = useSelector(selectFilter);
+  const { pizzas, status } = useSelector(selectPizzaData);
 
   useEffect(() => {
     const sort = SORT_MAP.get(sortID);
@@ -49,47 +39,42 @@ function Home() {
   }, [clickedCategory, sortID, currentPage, navigate]);
 
   useEffect(() => {
-    console.log("locationSearch", window.location.search);
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      console.log("params", params);
-      // const sort = SORT_MAP.get(sortID)
+
       dispatch(setFilters(params));
     }
     isSearch.current = true;
   }, [dispatch]);
 
   useEffect(() => {
-    function fetchPizzas() {
-      setIsLoading(true);
-      axios
-        .get("https://65559a0b84b36e3a431dfcd7.mockapi.io/items", {
-          params: {
-            ...getParams(clickedCategory, sortID),
-            page: currentPage.toString(),
-            limit: itemsPerPage.toString(),
-          },
-        })
-        .then((res) => {
-          searchedValue !== ""
-            ? setItems(
-                res.data.filter((pizza: ItemProps) =>
-                  pizza.title
-                    .toLocaleLowerCase()
-                    .includes(searchedValue.toLocaleLowerCase())
-                )
-              )
-            : setItems(res.data);
-          setIsLoading(false);
-        })
-        .catch((err) => console.log(err));
-    }
+    const getPizzas = async () => {
+      const sort = SORT_MAP.get(sortID);
+      const category = clickedCategory > 0 ? `category=${clickedCategory}` : "";
+      const search = searchedValue ? `&search=${searchedValue}` : "";
+      const page = currentPage.toString();
+      dispatch(fetchPizzas({ sort, category, search, page }));
+    };
+
     window.scrollTo(0, 0);
-    if (!isSearch.current) {
-      fetchPizzas();
+    getPizzas();
+    // if (!isSearch.current) {
+    //   getPizzas();
+    // }
+    // isSearch.current = false;
+  }, [clickedCategory, sortID, searchedValue, currentPage, dispatch]);
+
+  const previousCategoryRef = useRef(0);
+
+  useEffect(() => {
+    const categoryChanged = clickedCategory != previousCategoryRef.current;
+
+    if (categoryChanged) {
+      dispatch(setCurrentPage(1));
     }
-    isSearch.current = false;
-  }, [clickedCategory, sortID, searchedValue, currentPage]);
+
+    previousCategoryRef.current = clickedCategory;
+  }, [clickedCategory]);
 
   return (
     <>
@@ -100,7 +85,7 @@ function Home() {
 
       <div className="pizza-block">
         <h1>Пиццы</h1>
-        {items.length === 0 && !isLoading ? (
+        {pizzas.length === 0 && status === "error" ? (
           <div className="pizzas__error">
             <h2>Произошла ошибка 😕</h2>
             <p>
@@ -111,16 +96,16 @@ function Home() {
         ) : (
           <>
             <div className="pizzas">
-              {isLoading
+              {status === "loading"
                 ? Array(10)
                     .fill(null)
                     .map((_, index) => <Skeleton key={index} />)
-                : items.map((pizza, index) => (
+                : pizzas.map((pizza, index) => (
                     <Pizza pizzaData={pizza} key={index} />
                   ))}
             </div>
             <PaginationComponent
-              totalItems={items.length}
+              totalItems={pizzas.length}
               itemsPerPage={itemsPerPage}
             />
           </>
@@ -131,3 +116,26 @@ function Home() {
 }
 
 export default Home;
+
+// const getParams = (clickedCategory: number, sortID: number) => {
+//   return clickedCategory === 0
+//     ? { sortBy: SORT_MAP.get(sortID) }
+//     : { sortBy: SORT_MAP.get(sortID), category: clickedCategory.toString() };
+// };
+//const res = await axios.get("https://65559a0b84b36e3a431dfcd7.mockapi.io/items", {
+//   params: {
+//     ...getParams(clickedCategory, sortID),
+//     page: currentPage.toString(),
+//     limit: itemsPerPage.toString(),
+//   },
+// })
+
+// searchedValue !== ""
+// ? setItems(
+//     res.data.filter((pizza: ItemProps) =>
+//       pizza.title
+//         .toLocaleLowerCase()
+//         .includes(searchedValue.toLocaleLowerCase())
+//     )
+//   )
+// : setItems(res.data);
