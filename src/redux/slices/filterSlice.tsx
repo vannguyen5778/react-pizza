@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { RootState } from "../store";
 const initialState = {
   clickedCategory: 0,
   sortID: 0,
   currentPage: 1,
   sort: '',
+  searchedValue: '',
 
 };
 
@@ -27,9 +28,13 @@ const filterSlice = createSlice({
         state.clickedCategory = Number(action.payload.clickedCategory);
         console.log("setFilters" , state.currentPage, state.sort, state.clickedCategory )
 
+    },
+    setSearchedValue(state, action) {
+      state.searchedValue = action.payload;
     }
   },
 });
 
-export const { setClickedCategory, setSortID, setCurrentPage, setFilters } = filterSlice.actions;
+export const selectFilter = (state: RootState) => state.filter;
+export const { setClickedCategory, setSortID, setCurrentPage, setFilters, setSearchedValue } = filterSlice.actions;
 export default filterSlice.reducer;

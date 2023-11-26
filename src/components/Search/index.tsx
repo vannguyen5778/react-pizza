@@ -2,30 +2,31 @@ import React, { useCallback, useState } from "react";
 import styles from "./Search.module.scss";
 import SearchIcon from "@/assets/img/magnifying-glass.svg";
 import CloseIcon from "@/assets/img/close.svg";
-import { useSearching } from "@/context/SearchingContext";
 import { useRef } from "react";
 import { debounce } from "lodash";
+import { setSearchedValue } from "@/redux/slices/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFilter } from "@/redux/slices/filterSlice";
+
 
 const Search = () => {
-  const { setSearchedValue } = useSearching();
   const inputRef = useRef();
-  const [value, setValue] = useState<string>("");
+  const { searchedValue } = useSelector(selectFilter);
+const dispatch = useDispatch();
 
   const onChangeInput = (e) => {
-    setValue(e.target.value);
     updateSearchValue(e.target.value);
   };
 
   const updateSearchValue = useCallback(
     debounce((str) => {
-      setSearchedValue(str);
+      dispatch(setSearchedValue(str));
     }, 250),
     []
   );
 
   const onClickClear = () => {
-    setSearchedValue("");
-    setValue("");
+    dispatch(setSearchedValue(""));
     inputRef.current.focus();
   };
 
@@ -38,10 +39,10 @@ const Search = () => {
         ref={inputRef}
         type="text"
         placeholder="Поиск пиццы..."
-        value={value}
+        value={searchedValue}
         onChange={(e) => onChangeInput(e)}
       />
-      {value.length > 0 && (
+      {searchedValue.length > 0 && (
         <span className={styles.close} onClick={() => onClickClear()}>
           <img className="close" src={CloseIcon} alt="close icon" />
         </span>

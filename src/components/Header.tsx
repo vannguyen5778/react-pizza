@@ -2,14 +2,13 @@ import React from 'react'
 import Logo from "@/assets/img/pizza-logo.svg"
 import Cart from "@/assets/img/cart.svg"
 import { Link } from 'react-router-dom'
-import { useSearching } from '@/context/SearchingContext';
 import Search from './Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortID, setClickedCategory } from '@/redux/slices/filterSlice';
+import { selectCart } from '@/redux/slices/cartSlice';
 function Header() {
-//   const { setSortID, setClickedCategory } = useSearching();
 const dispatch = useDispatch();
-const { items, totalPrice, totalQty } = useSelector(state => state.cart)
+const { totalPrice, totalQty } = useSelector(selectCart)
 
   return (
     <div className="header">
