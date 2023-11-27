@@ -20,8 +20,6 @@ function Home() {
   const isSearch = useRef<boolean>(false);
   const isMounted = useRef<boolean>(false);
 
-  // const { searchedValue } = useSearching();
-
   const { clickedCategory, sortID, currentPage, searchedValue } = useSelector(selectFilter);
   const { pizzas, status } = useSelector(selectPizzaData);
 
@@ -41,7 +39,6 @@ function Home() {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-
       dispatch(setFilters(params));
     }
     isSearch.current = true;
@@ -74,13 +71,13 @@ function Home() {
     }
 
     previousCategoryRef.current = clickedCategory;
-  }, [clickedCategory]);
+  }, [clickedCategory, dispatch]);
 
   return (
     <>
       <div className="top-section">
         <Categories />
-        <Sort />
+        <Sort value={sortID}/>
       </div>
 
       <div className="pizza-block">
@@ -117,25 +114,3 @@ function Home() {
 
 export default Home;
 
-// const getParams = (clickedCategory: number, sortID: number) => {
-//   return clickedCategory === 0
-//     ? { sortBy: SORT_MAP.get(sortID) }
-//     : { sortBy: SORT_MAP.get(sortID), category: clickedCategory.toString() };
-// };
-//const res = await axios.get("https://65559a0b84b36e3a431dfcd7.mockapi.io/items", {
-//   params: {
-//     ...getParams(clickedCategory, sortID),
-//     page: currentPage.toString(),
-//     limit: itemsPerPage.toString(),
-//   },
-// })
-
-// searchedValue !== ""
-// ? setItems(
-//     res.data.filter((pizza: ItemProps) =>
-//       pizza.title
-//         .toLocaleLowerCase()
-//         .includes(searchedValue.toLocaleLowerCase())
-//     )
-//   )
-// : setItems(res.data);

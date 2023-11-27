@@ -1,18 +1,19 @@
-// import { useSearching } from "@/context/SearchingContext";
 import { useSelector, useDispatch } from "react-redux";
 import { setClickedCategory } from "@/redux/slices/filterSlice";
-import { filter } from "@/redux/slices/Filter"
+import { selectFilter } from "@/redux/slices/filterSlice";
+import useWhyDidYouUpdate from 'ahooks/lib/useWhyDidYouUpdate';
+import { useCallback } from "react";
 
-function Categories() {
-  // const { setClickedCategory } = useSearching();
-  const { clickedCategory } = useSelector(state => state.filter);
-// console.log(clickedCategory)
+const  Categories: React.FC = () =>  {
+  useWhyDidYouUpdate("Categories", {})
+
+  const { clickedCategory } = useSelector(selectFilter);
   const dispatch = useDispatch()
   
-  const onChangeCategory = (index: number) => {
-    dispatch(setClickedCategory(index))
-    console.log(clickedCategory)
-  }
+  const onChangeCategory = useCallback((index: number) => {
+    dispatch(setClickedCategory(index));
+  }, [dispatch]);
+
   const categories = [
     "Все",
     "Мясные",
@@ -38,6 +39,6 @@ function Categories() {
       ))}
     </ul>
   );
-}
 
+        }
 export default Categories;

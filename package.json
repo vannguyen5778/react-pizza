@@ -20,6 +20,7 @@
     "@mui/material": "^5.14.18",
     "@reduxjs/toolkit": "^1.9.7",
     "@types/uuid": "^9.0.7",
+    "ahooks": "^3.7.8",
     "axios": "^1.6.2",
     "ldrs": "^1.0.1",
     "lodash": "^4.17.21",

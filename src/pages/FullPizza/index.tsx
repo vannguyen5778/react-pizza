@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from './FullPizza.module.scss'
 import ReturnBtn from "@/components/ReturnBtn";
 import { reuleaux } from 'ldrs'
@@ -28,6 +28,7 @@ const FullPizza = () => {
   const defaultDescription = "Огонь настоящей итальянской кухни, она соблазняет своим нежным тестом, покрытым ароматным соусом из спелых помидоров. Под щедрой порцией сыра, растопившегося в золотистую корочку, скрываются разнообразные ингредиенты, приправленные тонкими специями. Одним словом, пицца - это настоящий кулинарный шедевр, который нельзя отказаться попробовать!";
 
   reuleaux.register();
+  const navigate = useNavigate();
 
 
 
@@ -37,7 +38,7 @@ const FullPizza = () => {
  
        
 const getData = (subject) => {
-      // const question = `напиши краткое описание пиццы ${subject} в 30 словах на русском`
+      const question = `напиши краткое описание пиццы ${subject} в 30 словах на русском`
 
   const options = {
     method: 'POST',
@@ -48,7 +49,7 @@ const getData = (subject) => {
       'X-RapidAPI-Host': 'simple-chatgpt-api.p.rapidapi.com'
     },
     data: {
-      question: 'give a mouthwatering description about pizza in 2-3 sentences'
+      question
     }
   };
   
@@ -71,7 +72,8 @@ const getData = (subject) => {
         console.log(pizza?.title);
         await setDescription(getData(pizza?.title));
       } catch {
-        console.log("Произошла ошибка при загрузке пиццы");
+        alert("Произошла ошибка при загрузке пиццы");
+        navigate("/")
       }
     }
     fetchPizza();
@@ -82,15 +84,7 @@ const getData = (subject) => {
     <l-reuleaux color="#fe5f1e"></l-reuleaux>
     </div>
   )
- 
-{/* <l-reuleaux
-  size="37"
-  stroke="5"
-  stroke-length="0.15"
-  bg-opacity="0.1"
-  speed="1.2"
-  color="black" 
-></l-reuleaux> */}
+
 
 
  
