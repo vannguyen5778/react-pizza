@@ -26,8 +26,6 @@ const filterSlice = createSlice({
         state.sort = action.payload.sort;
         state.currentPage = Number(action.payload.currentPage);
         state.clickedCategory = Number(action.payload.clickedCategory);
-        console.log("setFilters" , state.currentPage, state.sort, state.clickedCategory )
-
     },
     setSearchedValue(state, action) {
       state.searchedValue = action.payload;

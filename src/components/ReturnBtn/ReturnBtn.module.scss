@@ -1,0 +1,24 @@
+@use "@/scss/_mixins.scss" as mixins;
+.root {
+  @include mixins.flex-between;
+  padding: 20px;
+
+  button {
+    @include mixins.btn;
+    border: 1px solid #cecccc;
+    color: #cecccc;
+    background-color: #fff;
+    padding: 0 20px;
+    
+
+    img {
+      width: 12px;
+      height: 12px;
+      margin-right: 5px;
+      vertical-align: bottom;
+      transform: translateY(-3px);
+    }
+  }
+    
+  }
+

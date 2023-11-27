@@ -9,14 +9,12 @@ body {
   border: none;
   background-color: $orange;
   color: #fff;
-  // padding: 0 20px;
 }
 
 @mixin white-bg {
   border: 1px solid $orange;
   background-color: #fff;
   color: $orange;
-  // padding: 0 20px;
 }
 @mixin flex-between {
   display: flex;
@@ -97,8 +95,6 @@ body {
         border-right: 1px solid $gray-line;
         padding-right: 14px;
         display: flex;
-
-        // padding-right: 6px;
         flex: 1;
         span + span {
           margin-left: 5px;
@@ -302,23 +298,48 @@ body {
       height: 459px;
       text-align: center;
       transform: scale(0.9);
+      position: relative;
+
+      .img-wrapper {
+        overflow: hidden;
+      }
 
       &__image {
         width: 260px;
         height: 260px;
+        transition: transform 0.3s ease-in-out;
+        &:hover {
+          transform: rotate(20deg);
+        }
       }
       &__name {
         font-size: 18px;
         font-weight: 800;
         color: #000;
         padding: 10px 0;
+        outline: none;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+
+        &:focus-visible::before {
+          box-shadow: 0 0 5px 2px #fe5f1e;
+        }
       }
+
       .options-wrapper {
         background-color: $gray-line;
         font-size: 14px;
         font-weight: 700;
         padding: 4px;
         border-radius: 8px;
+        position: relative;
         ul {
           @include flex-between;
           flex-direction: row;
@@ -341,10 +362,12 @@ body {
         font-size: 20px;
         font-weight: 800;
         color: #000;
+        position: relative;
       }
       .bottom {
         @include flex-between;
         padding: 12px 0;
+        position: relative;
 
         .add-to-cart-btn {
           @include btn;
@@ -474,7 +497,8 @@ body {
 
       .right {
         flex: 1;
-        span {
+        span,
+        button {
           width: 32px;
           height: 32px;
           text-align: center;
@@ -484,6 +508,11 @@ body {
           font-size: 15px;
           color: $orange;
           border: 2px solid $orange;
+          background-color: #fff;
+          &:disabled {
+            color: #c7c5c5;
+            border: 2px solid #c7c5c5;
+          }
         }
         @include flex-between;
         .quantity-wrapper {

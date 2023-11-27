@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Logo from "@/assets/img/pizza-logo.svg"
 import Cart from "@/assets/img/cart.svg"
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Search from './Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortID, setClickedCategory } from '@/redux/slices/filterSlice';
 import { selectCart } from '@/redux/slices/cartSlice';
 function Header() {
 const dispatch = useDispatch();
+const location = useLocation();
 const { totalPrice, totalQty } = useSelector(selectCart)
 
   return (
@@ -22,6 +23,8 @@ const { totalPrice, totalQty } = useSelector(selectCart)
         </div>
         </Link>
         <Search />
+        {(location.pathname !== "/cart") && (
+
         <Link to="/cart">
         <div className="cart-wrapper">
             <button>
@@ -36,6 +39,7 @@ const { totalPrice, totalQty } = useSelector(selectCart)
             </button>
         </div>
         </Link>
+        )} 
     </div>
   )
 }

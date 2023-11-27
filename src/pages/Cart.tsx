@@ -1,6 +1,5 @@
 import CartSVG from "@/assets/img/shopping_cart.svg";
 import Trash from "@/assets/img/trash.svg";
-import ArrowLeft from "@/assets/img/grey-arrow-left.svg";
 import EmptyCart from "@/assets/img/empty-cart.png";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -11,6 +10,8 @@ import {
   selectCart
 } from "@/redux/slices/cartSlice";
 import { Link } from "react-router-dom";
+import ReturnBtn from "@/components/ReturnBtn";
+
 const Cart = () => {
   const { items, totalQty, totalPrice } = useSelector(selectCart);
   const dispatch = useDispatch();
@@ -63,21 +64,22 @@ const Cart = () => {
 
                   <div className="right">
                     <div className="quantity-wrapper">
-                      <span
+                      <button
+                        disabled={item.count == 1}
                         className="decrement"
                         onClick={() => dispatch(substractItem(item.id))}
                       >
                         –
-                      </span>
+                      </button>
                       <h2 className="quantity">{item.count}</h2>
-                      <span
+                      <button
                         className="increment"
                         onClick={() => dispatch(addItem(item))}
                       >
                         +
-                      </span>
+                      </button>
                     </div>
-                    <h2 className="price">{item.count ? item.price * item.count : 0} P</h2>
+                    <h2 className="price">{item.count ? item.price * item.count : 0} ₽</h2>
                     <span
                       className="delete"
                       onClick={() => dispatch(removeItem(item))}
@@ -94,16 +96,11 @@ const Cart = () => {
                 Всего пицц: <span className="quantity">{totalQty} шт.</span>{" "}
               </p>
               <p>
-                Сумма заказа: <span className="price">{totalPrice} Р</span>{" "}
+                Сумма заказа: <span className="price">{totalPrice} ₽</span>{" "}
               </p>
             </div>
             <div className="button-wrapper">
-              <Link to='/'>
-              <button className="back">
-                <img src={ArrowLeft} alt="" />
-                Вернуться назад
-              </button>
-              </Link>
+              <ReturnBtn />
               <button className="pay">Оплатить сейчас</button>
             </div>
           </div>

@@ -1,0 +1,19 @@
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @mixin flex-around {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @mixin btn {
+    cursor: pointer;
+    border-radius: 30px;
+    height: 40px;
+    min-width: 130px;
+    padding: 0 20px;
+  }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem, setItems } from '@/redux/slices/cartSlice'
+import { Link } from "react-router-dom";
 type Props = {
   pizzaData: object;
 };
@@ -13,7 +14,6 @@ const Pizza = ({ pizzaData }: Props) => {
   const [quantity, setQuantity] = useState<number>(0);
 
   const dispatch = useDispatch();
-//  const { items } = useSelector(state => state.cart)
 
   const TYPES_MAP = new Map();
   TYPES_MAP.set(0, "тонкое");
@@ -34,12 +34,15 @@ const Pizza = ({ pizzaData }: Props) => {
     dispatch(addItem(item))
     
   }
+  const link = `/pizza/${id}`;
 
   
   return (
     <div className="pizza">
-      <img className="pizza__image" src={imageUrl} alt="" />
-      <p className="pizza__name">{title}</p>
+      <div className="img-wrapper"><img className="pizza__image" src={imageUrl} alt="" /></div>
+      <Link to={link}>
+        <p className="pizza__name">{title}</p>
+      </Link>
       <div className="options-wrapper">
         {types.length === 1 ? (
           <ul className="thickness">

@@ -1,0 +1,35 @@
+.root {
+    padding: 60px 20px;
+    height: 450px;
+    
+    img {
+        width: 350px;
+        float: left;
+        margin-right: 100px;
+    }
+    h1 {
+        font-weight: 900;
+        padding: 0 20px;
+        font-size: 40px;
+    }
+    h2 {
+        padding: 20px 0 30px;
+        font-size: 20px;
+    }
+    h3 {
+
+        font-weight: 600;
+      
+    }
+}
+
+.loader {
+    margin: auto;
+    height: 600px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+
+}
