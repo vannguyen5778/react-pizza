@@ -25,6 +25,7 @@ const Pizza = ({ pizzaData }: Props) => {
     setQuantity((prevQty) => prevQty + 1); 
     const item = {
           id,
+          imageUrl,
           title,
           type: TYPES_MAP.get(thickness),
           size,

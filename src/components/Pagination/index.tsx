@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
@@ -36,7 +36,6 @@ const PaginationComponent = ({ totalItems, itemsPerPage }: Props) => {
     <ThemeProvider theme={theme}>
       <Pagination
         count={3}
-        variant="outlined"
         color="primary"
         page={currentPage}
         onChange={handlePaginationChange}

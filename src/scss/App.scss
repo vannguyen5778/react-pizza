@@ -389,8 +389,8 @@ body {
 }
 .empty {
   display: block;
-  padding: 20px;
-  max-width: 50%;
+  padding: 80px 20px;
+  max-width: 600px;
   margin: auto;
   text-align: center;
   p {
@@ -405,10 +405,10 @@ body {
     color: #fff;
     margin-top: 20px;
     border: none;
+    font-weight: 700;
   }
 }
 .cart {
-  display: none;
   padding: 20px;
   max-width: 70%;
   margin: auto;
@@ -520,6 +520,7 @@ body {
       }
       .pay {
         @include orange-bg;
+        font-weight: 700;
       }
       .back {
         border: 1px solid #cecccc;

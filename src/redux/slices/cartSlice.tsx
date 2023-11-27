@@ -3,11 +3,12 @@ import { RootState } from "../store";
 
 type CartItem = {
   id: string; 
+  imageUrl: string;
   title: string; 
   type: number; 
   size: number; 
   price: number;
-  count?: number | undefined; 
+  count?: number; 
 };
 type CartState = {
   totalPrice: number;
@@ -33,14 +34,14 @@ const cartSlice = createSlice({
       }
    
       state.totalPrice = state.items.reduce((sum, obj) => {
-        return  obj.price + sum;
+        return  obj.count*obj.price + sum;
       }, 0);
       state.totalQty = state.items.reduce((total, obj) => {
         return total + obj.count
       }, 0)
     },
     removeItem(state, action) {
-      state.items = state.items.filter((obj) => obj.id !== action.payload);
+      state.items = state.items.filter((obj) => obj.id !== action.payload.id);
     },
     clearCart(state) {
       state.items = [];
