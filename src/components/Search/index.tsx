@@ -4,15 +4,14 @@ import SearchIcon from "@/assets/img/magnifying-glass.svg";
 import CloseIcon from "@/assets/img/close.svg";
 import { useRef } from "react";
 import { debounce } from "lodash";
-import { setSearchedValue } from "@/redux/slices/filterSlice";
+import { setSearchedValue } from "@/redux/slices/filter/slice";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFilter } from "@/redux/slices/filterSlice";
-
+import { selectFilter } from "@/redux/slices/filter/selectors";
 
 const Search = () => {
   const inputRef = useRef();
   const { searchedValue } = useSelector(selectFilter);
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const onChangeInput = (e) => {
     updateSearchValue(e.target.value);

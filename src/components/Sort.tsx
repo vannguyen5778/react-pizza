@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import ArrowUp from "@/assets/img/arrow-top.svg";
 // import { useSearching } from "@/context/SearchingContext";
-import { setSortID } from "@/redux/slices/filterSlice";
+import { setSortID } from "@/redux/slices/filter/slice";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { RootState } from "@/redux/store";
+import { selectFilter } from "@/redux/slices/filter/selectors";
+
 export const SORT_MAP = new Map();
 SORT_MAP.set(0, "rating");
 SORT_MAP.set(1, "price");
@@ -14,7 +16,7 @@ const Sort: React.FC = React.memo(() => {
   const sortRef = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
   const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
-  const { sortID } = useTypedSelector((state) => state.filter);
+  const { sortID } = useTypedSelector(selectFilter);
   const dispatch = useDispatch();
 
   const handleChoice = (index: number) => {
@@ -23,7 +25,7 @@ const Sort: React.FC = React.memo(() => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         !event
           .composedPath()
@@ -63,4 +65,4 @@ const Sort: React.FC = React.memo(() => {
     </div>
   );
 });
-export default Sort; 
+export default Sort;

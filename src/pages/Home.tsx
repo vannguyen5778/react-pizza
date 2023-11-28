@@ -1,17 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilters } from "@/redux/slices/filterSlice";
-import { useSearching, ItemProps } from "@/context/SearchingContext";
+import { setFilters } from "@/redux/slices/filter/slice";
 import { useNavigate } from "react-router-dom";
-
 import Categories from "@/components/Categories";
 import Sort, { SORT_MAP } from "@/components/Sort";
 import Pizza from "@/components/Pizza";
 import Skeleton from "@/components/Pizza/Skeleton";
 import PaginationComponent from "@/components/Pagination";
 import qs from "qs";
-import { fetchPizzas, selectPizzaData } from "@/redux/slices/pizzaSlice";
-import { setCurrentPage, selectFilter } from "@/redux/slices/filterSlice";
+import { fetchPizzas } from "@/redux/slices/pizza/asyncActions";
+import { selectPizzaData } from "@/redux/slices/pizza/selectors";
+import { setCurrentPage } from "@/redux/slices/filter/slice";
+import { selectFilter } from "@/redux/slices/filter/selectors";
 
 function Home() {
   const itemsPerPage = 4;
@@ -20,7 +20,8 @@ function Home() {
   const isSearch = useRef<boolean>(false);
   const isMounted = useRef<boolean>(false);
 
-  const { clickedCategory, sortID, currentPage, searchedValue } = useSelector(selectFilter);
+  const { clickedCategory, sortID, currentPage, searchedValue } =
+    useSelector(selectFilter);
   const { pizzas, status } = useSelector(selectPizzaData);
 
   useEffect(() => {
@@ -77,7 +78,7 @@ function Home() {
     <>
       <div className="top-section">
         <Categories />
-        <Sort value={sortID}/>
+        <Sort />
       </div>
 
       <div className="pizza-block">
@@ -113,4 +114,3 @@ function Home() {
 }
 
 export default Home;
-

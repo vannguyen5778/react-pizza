@@ -1,8 +1,6 @@
 import ContentLoader from "react-content-loader";
-type Props = {
-  pizzaData: object;
-};
-const Skeleton = (props: Props) => (
+
+const Skeleton = () => (
   <ContentLoader
     speed={2}
     width={280}
@@ -10,7 +8,7 @@ const Skeleton = (props: Props) => (
     viewBox="0 0 280 465"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
-    {...props}
+    
   >
     <circle cx="130" cy="148" r="112" />
     <rect x="8" y="281" rx="10" ry="10" width="259" height="23" />

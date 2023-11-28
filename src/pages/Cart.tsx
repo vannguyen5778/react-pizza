@@ -7,19 +7,19 @@ import {
   removeItem,
   substractItem,
   clearCart,
-  selectCart
-} from "@/redux/slices/cartSlice";
+} from "@/redux/slices/cart/slice";
 import { Link } from "react-router-dom";
 import ReturnBtn from "@/components/ReturnBtn";
+import { selectCart } from "@/redux/slices/cart/selectors";
+
 
 const Cart = () => {
   const { items, totalQty, totalPrice } = useSelector(selectCart);
   const dispatch = useDispatch();
-  console.log(items);
   return (
     <>
       {items.length === 0 ? (
-         <div className="empty">
+        <div className="empty">
           <h2>Корзина пустая 😕</h2>
           <p>
             Вероятней всего, вы не заказывали ещё пиццу. <br /> Для того, чтобы
@@ -31,9 +31,8 @@ const Cart = () => {
           <Link to="/">
             <button>Вернуться назад</button>
           </Link>
-        </div> 
-       ) : ( 
-
+        </div>
+      ) : (
         <div className="cart">
           <div className="top-section">
             <div className="header-wrapper">
@@ -49,47 +48,47 @@ const Cart = () => {
           </div>
 
           <div className="cart__items">
-            {items.map((item, index) => 
-              (
-                <div className="item" key={index}>
-                  <div className="left">
-                    <img src={item.imageUrl} alt="" />
-                    <div className="text-wrap">
-                      <h2 className="name">{item.title}</h2>
-                      <p className="description">
-                        {item.type}, {item.size}cm
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="right">
-                    <div className="quantity-wrapper">
-                      <button
-                        disabled={item.count == 1}
-                        className="decrement"
-                        onClick={() => dispatch(substractItem(item.id))}
-                      >
-                        –
-                      </button>
-                      <h2 className="quantity">{item.count}</h2>
-                      <button
-                        className="increment"
-                        onClick={() => dispatch(addItem(item))}
-                      >
-                        +
-                      </button>
-                    </div>
-                    <h2 className="price">{item.count ? item.price * item.count : 0} ₽</h2>
-                    <span
-                      className="delete"
-                      onClick={() => dispatch(removeItem(item))}
-                    >
-                      x
-                    </span>
+            {items.map((item, index) => (
+              <div className="item" key={index}>
+                <div className="left">
+                  <img src={item.imageUrl} alt="" />
+                  <div className="text-wrap">
+                    <h2 className="name">{item.title}</h2>
+                    <p className="description">
+                      {item.type}, {item.size}cm
+                    </p>
                   </div>
                 </div>
-              )
-            )}
+
+                <div className="right">
+                  <div className="quantity-wrapper">
+                    <button
+                      disabled={item.count == 1}
+                      className="decrement"
+                      onClick={() => dispatch(substractItem(item.id))}
+                    >
+                      –
+                    </button>
+                    <h2 className="quantity">{item.count}</h2>
+                    <button
+                      className="increment"
+                      onClick={() => dispatch(addItem(item))}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <h2 className="price">
+                    {item.count ? item.price * item.count : 0} ₽
+                  </h2>
+                  <span
+                    className="delete"
+                    onClick={() => dispatch(removeItem(item))}
+                  >
+                    x
+                  </span>
+                </div>
+              </div>
+            ))}
 
             <div className="total-wrapper">
               <p>
@@ -105,8 +104,7 @@ const Cart = () => {
             </div>
           </div>
         </div>
-
-        )}  
+      )}
     </>
   );
 };

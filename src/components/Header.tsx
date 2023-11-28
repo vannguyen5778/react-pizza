@@ -4,8 +4,8 @@ import Cart from "@/assets/img/cart.svg";
 import { Link, useLocation } from "react-router-dom";
 import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
-import { setSortID, setClickedCategory } from "@/redux/slices/filterSlice";
-import { selectCart } from "@/redux/slices/cartSlice";
+import { setSortID, setClickedCategory } from "@/redux/slices/filter/slice";
+import { selectCart } from "@/redux/slices/cart/selectors";
 
 function Header() {
   const dispatch = useDispatch();
@@ -15,10 +15,10 @@ function Header() {
   useEffect(() => {
     if (isMounted.current) {
       const json = JSON.stringify(items);
-      localStorage.setItem('cart', json);
+      localStorage.setItem("cart", json);
     }
-    isMounted.current = true
-  }, [items, dispatch])
+    isMounted.current = true;
+  }, [items, dispatch]);
 
   return (
     <div className="header">

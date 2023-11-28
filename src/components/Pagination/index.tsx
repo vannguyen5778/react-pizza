@@ -2,7 +2,7 @@ import React from "react";
 import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentPage } from "@/redux/slices/filterSlice";
+import { setCurrentPage } from "@/redux/slices/filter/slice";
 
 type Props = {
   totalItems: number;
@@ -23,8 +23,8 @@ const theme = createTheme({
 
 const PaginationComponent = ({ totalItems, itemsPerPage }: Props) => {
   // const pageCount = Math.ceil(totalItems / itemsPerPage);
-  const { currentPage } = useSelector(state => state.filter)
-  const dispatch = useDispatch()
+  const { currentPage } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
   const handlePaginationChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -39,7 +39,7 @@ const PaginationComponent = ({ totalItems, itemsPerPage }: Props) => {
         color="primary"
         page={currentPage}
         onChange={handlePaginationChange}
-        sx={{ mx: 'auto', pl: 7, py: 2, width: '300px'}}
+        sx={{ mx: "auto", pl: 7, py: 2, width: "300px" }}
       />
     </ThemeProvider>
   );
