@@ -11,7 +11,7 @@ interface FetchPizzasParams {
 
 export const fetchPizzas = createAsyncThunk(
   "pizza/fetchPizzasStatus",
-  async (params: FetchPizzasParams, thunkAPI) => {
+  async (params: FetchPizzasParams) => {
     const { sort, category, search, page } = params;
     const { data } = await axios.get(
       `https://65559a0b84b36e3a431dfcd7.mockapi.io/items?page=${page}&limit=4&${category}&sortBy=${sort}${search}`

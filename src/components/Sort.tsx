@@ -9,7 +9,7 @@ SORT_MAP.set(0, "rating");
 SORT_MAP.set(1, "price");
 SORT_MAP.set(2, "title");
 
-const Sort = () => {
+const Sort: React.FC = React.memo(() => {
   const sortChoices = ["популярности", "цене", "алфавиту"];
   const sortRef = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -62,6 +62,5 @@ const Sort = () => {
       )}
     </div>
   );
-};
-
-export default Sort;
+});
+export default Sort; 
