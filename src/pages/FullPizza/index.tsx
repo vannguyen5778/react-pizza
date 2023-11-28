@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {useNavigate, useParams } from "react-router-dom";
 import styles from './FullPizza.module.scss'
 import ReturnBtn from "@/components/ReturnBtn";
-import { reuleaux } from 'ldrs'
+import Loader from "@/components/Loader";
 
 
 type PizzaData = {
@@ -26,8 +26,6 @@ const FullPizza = () => {
   const [description, setDescription] = useState<string>('');
   const { id } = useParams();
   const defaultDescription = "Огонь настоящей итальянской кухни, она соблазняет своим нежным тестом, покрытым ароматным соусом из спелых помидоров. Под щедрой порцией сыра, растопившегося в золотистую корочку, скрываются разнообразные ингредиенты, приправленные тонкими специями. Одним словом, пицца - это настоящий кулинарный шедевр, который нельзя отказаться попробовать!";
-
-  reuleaux.register();
   const navigate = useNavigate();
 
 
@@ -37,7 +35,7 @@ const FullPizza = () => {
 
  
        
-const getData = (subject) => {
+const getData = (subject: string) => {
       const question = `напиши краткое описание пиццы ${subject} в 30 словах на русском`
 
   const options = {
@@ -80,9 +78,7 @@ const getData = (subject) => {
   }, []);
 
   if (!pizza || !description) return  (
-  <div className={styles.loader}>
-    <l-reuleaux color="#fe5f1e"></l-reuleaux>
-    </div>
+  <Loader />
   )
 
 

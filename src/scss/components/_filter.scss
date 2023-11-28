@@ -1,0 +1,74 @@
+@import "../variables";
+@import "../mixins";
+
+.top-section {
+    @include flex-between;
+    font-size: 14px;
+  
+    .categories {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      .categories-btn {
+        padding: 10px 24px;
+        border-radius: 30px;
+        background-color: #f2f2f2;
+        font-weight: 700;
+        &:hover {
+          // background-color: #f9f9f9;
+          opacity: 0.5;
+        }
+      }
+      .active {
+        background-color: $black;
+        color: #fff;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 700;
+      }
+    }
+    .sort-wrapper {
+      position: relative;
+      .sort {
+        &__text {
+          font-weight: 600;
+        }
+        &__choice {
+          color: $orange;
+          border-bottom: 1px dashed $orange;
+          padding-top: 5px;
+        }
+        img {
+          padding: 1px 3px;
+        }
+      }
+  
+      .sort-popup {
+        // display: none;
+        margin-top: 10px;
+        position: absolute;
+        right: 0;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+        ul {
+          width: 180px;
+          padding: 10px 0;
+          background-color: #fff;
+          li {
+            width: 100%;
+            padding: 12px 20px;
+            cursor: pointer;
+            &:hover {
+              background-color: rgba(254, 95, 30, 0.05);
+              font-weight: 700;
+              color: $orange;
+            }
+            .active {
+              font-weight: 700;
+              color: $orange;
+            }
+          }
+        }
+      }
+    }
+  }

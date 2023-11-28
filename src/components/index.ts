@@ -1,0 +1,5 @@
+export { default as Skeleton } from "./Pizza/Skeleton"
+export { default as Pizza } from "./Pizza"
+export { default as PaginationComponent } from "./Pagination"
+export { default as Sort } from "./Sort"
+export { default as Categories } from "./Categories"

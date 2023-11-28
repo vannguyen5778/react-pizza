@@ -1,19 +1,38 @@
+
+@mixin orange-bg {
+  border: none;
+  background-color: $orange;
+  color: #fff;
+}
+
+@mixin white-bg {
+  border: 1px solid $orange;
+  background-color: #fff;
+  color: $orange;
+}
 @mixin flex-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  @mixin flex-around {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  @mixin btn {
-    cursor: pointer;
-    border-radius: 30px;
-    height: 40px;
-    min-width: 130px;
-    padding: 0 20px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-around {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin btn {
+  cursor: pointer;
+  border-radius: 30px;
+  height: 40px;
+  min-width: 130px;
+  padding: 0 20px;
+}
+
+@mixin header-text {
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #181818;
+}

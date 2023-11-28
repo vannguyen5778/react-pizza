@@ -1,17 +1,18 @@
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilters } from "@/redux/slices/filter/slice";
 import { useNavigate } from "react-router-dom";
-import Categories from "@/components/Categories";
-import Sort, { SORT_MAP } from "@/components/Sort";
-import Pizza from "@/components/Pizza";
-import Skeleton from "@/components/Pizza/Skeleton";
-import PaginationComponent from "@/components/Pagination";
+import { SORT_MAP } from "@/components/Sort";
+
+import { PaginationComponent, Skeleton, Sort, Pizza, Categories } from "@/components";
+
 import qs from "qs";
 import { fetchPizzas } from "@/redux/slices/pizza/asyncActions";
 import { selectPizzaData } from "@/redux/slices/pizza/selectors";
 import { setCurrentPage } from "@/redux/slices/filter/slice";
 import { selectFilter } from "@/redux/slices/filter/selectors";
+import { setFilters } from "@/redux/slices/filter/slice";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { RootState } from "@/redux/store";
 
 function Home() {
   const itemsPerPage = 4;
@@ -19,7 +20,7 @@ function Home() {
   const navigate = useNavigate();
   const isSearch = useRef<boolean>(false);
   const isMounted = useRef<boolean>(false);
-
+  const thunkDispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
   const { clickedCategory, sortID, currentPage, searchedValue } =
     useSelector(selectFilter);
   const { pizzas, status } = useSelector(selectPizzaData);
@@ -51,26 +52,24 @@ function Home() {
       const category = clickedCategory > 0 ? `category=${clickedCategory}` : "";
       const search = searchedValue ? `&search=${searchedValue}` : "";
       const page = currentPage.toString();
-      dispatch(fetchPizzas({ sort, category, search, page }));
+      thunkDispatch(fetchPizzas({ sort, category, search, page }));
     };
 
     window.scrollTo(0, 0);
     getPizzas();
-    // if (!isSearch.current) {
-    //   getPizzas();
-    // }
-    // isSearch.current = false;
-  }, [clickedCategory, sortID, searchedValue, currentPage, dispatch]);
+    if (!isSearch.current) {
+      getPizzas();
+    }
+    isSearch.current = true;
+  }, [clickedCategory, sortID, searchedValue, currentPage, thunkDispatch]);
 
   const previousCategoryRef = useRef(0);
 
   useEffect(() => {
     const categoryChanged = clickedCategory != previousCategoryRef.current;
-
     if (categoryChanged) {
       dispatch(setCurrentPage(1));
     }
-
     previousCategoryRef.current = clickedCategory;
   }, [clickedCategory, dispatch]);
 
