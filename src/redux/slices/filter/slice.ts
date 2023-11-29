@@ -6,6 +6,7 @@ const initialState = {
   currentPage: 1,
   sort: '',
   searchedValue: '',
+  cat: 0,
 
 };
 
@@ -25,7 +26,7 @@ const filterSlice = createSlice({
     setFilters(state, action) {
         state.sort = action.payload.sort;
         state.currentPage = Number(action.payload.currentPage);
-        state.clickedCategory = Number(action.payload.clickedCategory);
+        state.cat = Number(action.payload.clickedCategory);
     },
     setSearchedValue(state, action) {
       state.searchedValue = action.payload;

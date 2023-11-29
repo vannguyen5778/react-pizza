@@ -15,11 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
         <Route path="" element={<Home />}></Route>
-        
         <Route path="cart" element={<Suspense fallback={<Loader />} ><Cart /></Suspense>}></Route>
         <Route path="pizza/:id" element={<Suspense fallback={<Loader />} ><FullPizza /></Suspense>} > </Route>
         <Route path="*" element={<Suspense fallback={<Loader />} ><NotFound /></Suspense>}></Route>
-      
         </Route>
       </Routes>
    
@@ -29,8 +27,9 @@ function App() {
 export default App;
 
 
-// splitting scss files
-// url parameter
-// stripe payment
+// splitting scss files done
+// url parameter 
+// stripe payment its back end tho
 // responsive cart
 // authourisation
+// home done

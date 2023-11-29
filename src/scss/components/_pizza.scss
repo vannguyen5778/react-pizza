@@ -45,8 +45,9 @@
           width: 260px;
           height: 260px;
           transition: transform 0.3s ease-in-out;
+          z-index: 9999;
           &:hover {
-            transform: rotate(20deg);
+            transform: rotate(60deg);
           }
         }
         &__name {
@@ -55,7 +56,7 @@
           color: #000;
           padding: 10px 0;
           outline: none;
-  
+         
           &::before {
             content: "";
             position: absolute;
@@ -65,6 +66,8 @@
             left: 0;
             cursor: pointer;
           }
+         
+
   
           &:focus-visible::before {
             box-shadow: 0 0 5px 2px #fe5f1e;

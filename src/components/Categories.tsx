@@ -25,6 +25,7 @@ const Categories: React.FC = () => {
     "Открытые",
     "Закрытые",
   ];
+  
 
   return (
     <ul className="categories">
