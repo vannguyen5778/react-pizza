@@ -1,13 +1,10 @@
-import React from "react";
 import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentPage } from "@/redux/slices/filter/slice";
+import { selectFilter } from "@/redux/slices/filter/selectors";
 
-type Props = {
-  totalItems: number;
-  itemsPerPage: number;
-};
+
 
 const theme = createTheme({
   palette: {
@@ -21,12 +18,10 @@ const theme = createTheme({
   spacing: 10,
 });
 
-const PaginationComponent = ({ totalItems, itemsPerPage }: Props) => {
-  // const pageCount = Math.ceil(totalItems / itemsPerPage);
-  const { currentPage } = useSelector((state) => state.filter);
+const PaginationComponent = () => {
+  const { currentPage } = useSelector(selectFilter);
   const dispatch = useDispatch();
   const handlePaginationChange = (
-    event: React.ChangeEvent<unknown>,
     value: number
   ) => {
     console.log(value);
@@ -38,7 +33,7 @@ const PaginationComponent = ({ totalItems, itemsPerPage }: Props) => {
         count={3}
         color="primary"
         page={currentPage}
-        onChange={handlePaginationChange}
+        onChange={() => handlePaginationChange}
         sx={{ mx: "auto", pl: 7, py: 2, width: "300px" }}
       />
     </ThemeProvider>

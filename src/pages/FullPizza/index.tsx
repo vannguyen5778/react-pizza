@@ -43,14 +43,21 @@ const FullPizza = () => {
       },
     };
 
-    try {
-      const { data } = axios.request(options);
+   try {
+  axios.request(options)
+    .then(response => {
+      const data = response.data;
       return data ? data.answer : defaultDescription;
-    } catch {
-      console.error();
+    })
+    .catch(error => {
+      console.error(error);
       return defaultDescription;
-    }
-  };
+    });
+} catch (error) {
+  console.error(error);
+  return defaultDescription;
+}
+  }
 
   useEffect(() => {
     async function fetchPizza() {
@@ -59,8 +66,8 @@ const FullPizza = () => {
           `https://65559a0b84b36e3a431dfcd7.mockapi.io/items/${id}`
         );
         setPizza(data);
-        console.log(pizza?.title);
-        setDescription(getData(pizza?.title));
+        const descriptionData = await getData(data?.title); 
+      setDescription(descriptionData ?? defaultDescription); 
       } catch {
         alert("Произошла ошибка при загрузке пиццы");
         navigate("/");
@@ -82,7 +89,7 @@ const FullPizza = () => {
             {pizza.sizes.length > 1 ? "Имеются пиццы " : "Имеeтся пицца"}{" "}
             {pizza.sizes
               .map((size, index) => {
-                if (pizza.sizes.length == 1) return size + "см";
+                if (pizza.sizes.length >= 1) return size + "см";
                 else if (index === pizza.sizes.length - 1) {
                   return "и " + size + "см";
                 } else if (index === pizza.sizes.length - 2) {

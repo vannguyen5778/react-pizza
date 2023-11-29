@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./Search.module.scss";
 import SearchIcon from "@/assets/img/magnifying-glass.svg";
 import CloseIcon from "@/assets/img/close.svg";
@@ -11,13 +11,13 @@ import { useMediaQuery } from "react-responsive";
 
 const Search = () => {
   const isDesktop = useMediaQuery({ minWidth: 1094 });
-  const inputRef = useRef<HTMLInputElement>("");
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const { searchedValue } = useSelector(selectFilter);
   const dispatch = useDispatch();
   const [isExpanded, setExpand] = useState<boolean>(true);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateSearchValue(e.target.value);
   };
 
@@ -30,7 +30,7 @@ const Search = () => {
 
   const onClickClear = () => {
     dispatch(setSearchedValue(""));
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   useEffect(() => {

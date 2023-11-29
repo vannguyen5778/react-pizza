@@ -3,7 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SORT_MAP } from "@/components/Sort";
 
-import { PaginationComponent, Skeleton, Sort, Pizza, Categories } from "@/components";
+import {
+  PaginationComponent,
+  Skeleton,
+  Sort,
+  Pizza,
+  Categories,
+} from "@/components";
 
 import qs from "qs";
 import { fetchPizzas } from "@/redux/slices/pizza/asyncActions";
@@ -15,12 +21,12 @@ import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
 
 function Home() {
-  const itemsPerPage = 4;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = useRef<boolean>(false);
   const isMounted = useRef<boolean>(false);
-  const thunkDispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
+  const thunkDispatch: ThunkDispatch<RootState, unknown, AnyAction> =
+    useDispatch();
   const { clickedCategory, sortID, currentPage, searchedValue } =
     useSelector(selectFilter);
   const { pizzas, status } = useSelector(selectPizzaData);
@@ -101,10 +107,7 @@ function Home() {
                     <Pizza pizzaData={pizza} key={index} />
                   ))}
             </div>
-            <PaginationComponent
-              totalItems={pizzas.length}
-              itemsPerPage={itemsPerPage}
-            />
+            <PaginationComponent />
           </>
         )}
       </div>

@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, setItems } from "@/redux/slices/cart/slice";
+import { addItem } from "@/redux/slices/cart/slice";
 import { Link } from "react-router-dom";
 import { selectCart } from "@/redux/slices/cart/selectors";
+
+
+type PizzaData = {
+  id: string;
+  imageUrl: string;
+  title: string;
+  types: number[]; 
+  sizes: number[]; 
+  price: number;
+  category: string; 
+  rating: number; 
+};
+
 type Props = {
-  pizzaData: object;
+  pizzaData: PizzaData;
 };
 const Pizza = ({ pizzaData }: Props) => {
-  const { id, imageUrl, title, types, sizes, price, category, rating } =
+  const { id, imageUrl, title, types, sizes, price } =
     pizzaData;
   const [size, setSize] = useState<number>(sizes[0]);
   const { items } = useSelector(selectCart)

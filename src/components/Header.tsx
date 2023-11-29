@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef } from "react";
 import Logo from "@/assets/img/pizza-logo.svg";
 import Cart from "@/assets/img/cart.svg";
 import { Link, useLocation } from "react-router-dom";
