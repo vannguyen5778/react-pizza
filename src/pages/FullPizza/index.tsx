@@ -75,39 +75,41 @@ const FullPizza = () => {
     <>
       <div className={styles.root}>
         <img src={pizza.imageUrl} alt="" />
-        <h1>{pizza.title}</h1>
-        <h2>{description}</h2>
-        <h3>
-          {pizza.sizes.length > 1 ? "Имеются пиццы " : "Имеeтся пицца"}{" "}
-          {pizza.sizes
-            .map((size, index) => {
-              if (pizza.sizes.length == 1) return size + "см";
-              else if (index === pizza.sizes.length - 1) {
-                return "и " + size + "см";
-              } else if (index === pizza.sizes.length - 2) {
-                return size + "см ";
-              } else {
-                return size + "см, ";
-              }
-            })
-            .join("")}{" "}
-          {pizza.sizes.length > 1 ? "размеров" : "размера"}.
-        </h3>
-        <h3>
-          {" "}
-          В наличии{" "}
-          {pizza.types
-            .map((type) => {
-              if (pizza.types.length > 1) {
-                return "и " + TYPES_MAP.get(type);
-              } else {
-                return TYPES_MAP.get(type);
-              }
-            })
-            .join("")}{" "}
-          тесто.
-        </h3>
-        <h3>Стоимость одной пиццы: {pizza.price} ₽</h3>
+        <div className="content-wrapper">
+          <h1>{pizza.title}</h1>
+          <h2>{description}</h2>
+          <h3>
+            {pizza.sizes.length > 1 ? "Имеются пиццы " : "Имеeтся пицца"}{" "}
+            {pizza.sizes
+              .map((size, index) => {
+                if (pizza.sizes.length == 1) return size + "см";
+                else if (index === pizza.sizes.length - 1) {
+                  return "и " + size + "см";
+                } else if (index === pizza.sizes.length - 2) {
+                  return size + "см ";
+                } else {
+                  return size + "см, ";
+                }
+              })
+              .join("")}{" "}
+            {pizza.sizes.length > 1 ? "размеров" : "размера"}.
+          </h3>
+          <h3>
+            {" "}
+            В наличии{" "}
+            {pizza.types
+              .map((type) => {
+                if (pizza.types.length > 1) {
+                  return "и " + TYPES_MAP.get(type);
+                } else {
+                  return TYPES_MAP.get(type);
+                }
+              })
+              .join("")}{" "}
+            тесто.
+          </h3>
+          <h3>Стоимость одной пиццы: {pizza.price} ₽</h3>
+        </div>
       </div>
       <ReturnBtn />
     </>

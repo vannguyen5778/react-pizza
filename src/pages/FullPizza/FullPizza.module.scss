@@ -1,11 +1,13 @@
 .root {
-    padding: 60px 0;
+    padding: 60px 20px;
+    display: flex;
     // height: 450px;
     
     img {
         width: 350px;
+        height: 350px;
         float: left;
-        margin-right: 50px;
+        margin-right: 30px;
     }
     h1 {
         font-weight: 900;
@@ -23,3 +25,27 @@
     }
 }
 
+@media (max-width: 1087px) {
+    .root {
+        display: block;
+        img{
+            float: left;
+        }
+    }
+}
+
+@media (max-width: 927px) {
+    .root {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h1 {
+        text-align: center;
+        }
+        img {
+            float: none;
+        }
+    }
+    
+}

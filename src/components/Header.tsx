@@ -39,23 +39,26 @@ function Header() {
           </div>
         </div>
       </Link>
-      <Search />
-      {location.pathname !== "/cart" && (
-        <Link to="/cart">
-          <div className="cart-wrapper">
-            <button>
-              <span className="total-price">
-                <span>{totalPrice}</span>
-                <span>₽</span>
-              </span>
-              <span className="item-quantity">
-                <img src={Cart} alt="" />
-                <span>{totalQty}</span>
-              </span>
-            </button>
-          </div>
-        </Link>
-      )}
+
+      <div className="header-wrap">
+        {!location.pathname.startsWith("/pizza/") && <Search />}
+        {location.pathname !== "/cart" && (
+          <Link to="/cart">
+            <div className="cart-wrapper">
+              <button>
+                <span className="total-price">
+                  <span>{totalPrice}</span>
+                  <span>₽</span>
+                </span>
+                <span className="item-quantity">
+                  <img src={Cart} alt="" />
+                  <span>{totalQty}</span>
+                </span>
+              </button>
+            </div>
+          </Link>
+        )}
+      </div>
     </div>
   );
 }

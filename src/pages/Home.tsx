@@ -29,7 +29,7 @@ function Home() {
     const sort = SORT_MAP.get(sortID);
     if (isMounted.current) {
       const queryString = qs.stringify({
-        clickedCategory,
+        cat: clickedCategory,
         sort,
         currentPage,
       });

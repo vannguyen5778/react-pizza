@@ -1,30 +1,27 @@
 .root {
   position: relative;
   left: -120px;
+  transform: translateX(100px);
+  margin: 0 5px;
+
   input {
-    width: 300px;
-    padding: 10px 15px;
-    border-radius: 10px;
     border: 1px solid rgb(175, 173, 173);
     color: rgb(151, 151, 151);
     font-size: 14px;
-    padding-left: 33px;
-    // transition: all 0.25s ease-in-out;
     &:focus {
       border: 1px solid rgb(137, 135, 135);
-    //   width: 450px;
     }
   }
+
   img {
     width: 20px;
     height: 20px;
     opacity: 0.3;
   }
 }
-@media (max-width: 1180px) {
-  .root input,
-  .root img {
-    // display: none;
+@media (max-width: 590px) {
+  .root {
+    transform: translateX(120px);
   }
 }
 
@@ -41,4 +38,22 @@
   &:hover {
     opacity: 0.7;
   }
+}
+
+.check {
+  display: none;
+}
+
+.expanded {
+  width: 300px;
+  border-radius: 10px;
+  padding: 10px 15px 10px 33px;
+  transition: all 0.3s ease-out;
+}
+
+.notExpanded {
+  width: 30px;
+  padding: 9px 19px;
+  border-radius: 50%;
+  transition: all 0.3s ease-in;
 }

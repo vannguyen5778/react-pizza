@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import ArrowUp from "@/assets/img/arrow-top.svg";
-// import { useSearching } from "@/context/SearchingContext";
 import { setSortID } from "@/redux/slices/filter/slice";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { RootState } from "@/redux/store";

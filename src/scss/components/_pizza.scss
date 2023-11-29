@@ -30,12 +30,12 @@
       }
   
       .pizza {
-        // display: none;
         width: 280px;
         height: 459px;
         text-align: center;
         transform: scale(0.9);
         position: relative;
+        transition: transform 0.3s ease-in-out;
   
         .img-wrapper {
           overflow: hidden;
@@ -44,11 +44,11 @@
         &__image {
           width: 260px;
           height: 260px;
-          transition: transform 0.3s ease-in-out;
           z-index: 9999;
-          &:hover {
-            transform: rotate(60deg);
-          }
+        }
+        &:hover {
+          transition-delay: .2s;
+          transform: scale(1.0000001);
         }
         &__name {
           font-size: 18px;
@@ -115,9 +115,9 @@
             @include flex-around;
             padding: 0 15px;
             line-height: 22px;
-            @include orange-bg; //orange
+            @include orange-bg; 
             &.white {
-              @include white-bg; //white setting
+              @include white-bg; 
             }
   
             svg {
@@ -126,7 +126,7 @@
             }
   
             span {
-              color: #fff; //orange setting
+              color: #fff; 
               font-size: 14px;
               font-weight: 800;
               padding: 10px;
