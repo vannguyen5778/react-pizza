@@ -6,10 +6,12 @@ import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
 import { setSortID, setClickedCategory } from "@/redux/slices/filter/slice";
 import { selectCart } from "@/redux/slices/cart/selectors";
+import useMediaQuery from "@/utils/mediaQueries";
 
 function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const isLargerThanTablet = useMediaQuery('840px');
   const { totalPrice, totalQty, items } = useSelector(selectCart);
   const isMounted = useRef(false);
   useEffect(() => {
@@ -41,7 +43,7 @@ function Header() {
       </Link>
 
       <div className="header-wrap">
-        {!location.pathname.startsWith("/pizza/") && <Search />}
+        {!location.pathname.startsWith("/pizza/") && isLargerThanTablet && <Search />}
         {location.pathname !== "/cart" && (
           <Link to="/cart">
             <div className="cart-wrapper">

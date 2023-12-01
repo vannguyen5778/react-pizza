@@ -7,10 +7,12 @@ import { debounce } from "lodash";
 import { setSearchedValue } from "@/redux/slices/filter/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilter } from "@/redux/slices/filter/selectors";
-import { useMediaQuery } from "react-responsive";
+import useMediaQuery from "@/utils/mediaQueries";
 
 const Search = () => {
-  const isDesktop = useMediaQuery({ minWidth: 1094 });
+  const isDesktop = useMediaQuery("1094px");
+  const isLargerThanMobile = useMediaQuery('510px');
+
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { searchedValue } = useSelector(selectFilter);
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const Search = () => {
     updateSearchValue(e.target.value);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = useCallback(
     debounce((str) => {
       dispatch(setSearchedValue(str));
@@ -34,8 +37,8 @@ const Search = () => {
   };
 
   useEffect(() => {
-    isDesktop ? setExpand(true) : setExpand(false);
-  }, [isDesktop]);
+    isDesktop || !isLargerThanMobile ? setExpand(true) : setExpand(false);
+  }, [isDesktop, isLargerThanMobile]);
   const handleExpand = () => {
     setExpand((prev) => !prev);
   };

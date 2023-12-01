@@ -46,10 +46,7 @@
           height: 260px;
           z-index: 9999;
         }
-        &:hover {
-          transition-delay: .2s;
-          transform: scale(1.0000001);
-        }
+       
         &__name {
           font-size: 18px;
           font-weight: 800;
