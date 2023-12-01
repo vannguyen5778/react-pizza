@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SORT_MAP } from "@/components/Sort";
 
 import {
@@ -19,10 +19,14 @@ import { selectFilter } from "@/redux/slices/filter/selectors";
 import { setFilters } from "@/redux/slices/filter/slice";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
+import useMediaQuery from "@/utils/mediaQueries";
+import Search from "@/components/Search";
 
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isLargerThanTablet = useMediaQuery('840px');
   const isSearch = useRef<boolean>(false);
   const isMounted = useRef<boolean>(false);
   const thunkDispatch: ThunkDispatch<RootState, unknown, AnyAction> =
@@ -82,13 +86,15 @@ function Home() {
   return (
     <>
       <div className="top-section">
+      {!location.pathname.startsWith("/pizza/") && !isLargerThanTablet && <Search />}
+
         <Categories />
         <Sort />
       </div>
 
       <div className="pizza-block">
         <h1>Пиццы</h1>
-        {pizzas.length === 0 && status === "error" ? (
+        {pizzas.length === 0 && status==="error" ? (
           <div className="pizzas__error">
             <h2>Произошла ошибка 😕</h2>
             <p>

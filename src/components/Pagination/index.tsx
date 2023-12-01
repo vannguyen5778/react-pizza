@@ -33,7 +33,7 @@ const PaginationComponent = () => {
         count={3}
         color="primary"
         page={currentPage}
-        onChange={() => handlePaginationChange}
+        onChange={(_event, value) => handlePaginationChange(value)} 
         sx={{ mx: "auto", pl: 7, py: 2, width: "300px" }}
       />
     </ThemeProvider>

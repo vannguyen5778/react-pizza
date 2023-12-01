@@ -74,6 +74,7 @@ const FullPizza = () => {
       }
     }
     fetchPizza();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!pizza || !description) return <Loader />;
@@ -88,9 +89,9 @@ const FullPizza = () => {
           <h3>
             {pizza.sizes.length > 1 ? "Имеются пиццы " : "Имеeтся пицца"}{" "}
             {pizza.sizes
-              .map((size, index) => {
-                if (pizza.sizes.length >= 1) return size + "см";
-                else if (index === pizza.sizes.length - 1) {
+              .map((size, index: number) => {
+                if (pizza.sizes.length < 2) return size + "см";
+                if (index === pizza.sizes.length - 1) {
                   return "и " + size + "см";
                 } else if (index === pizza.sizes.length - 2) {
                   return size + "см ";
